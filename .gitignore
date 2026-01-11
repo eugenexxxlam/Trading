@@ -1,0 +1,114 @@
+# API Keys and Sensitive Configuration Files
+*.json
+!package.json
+!package-lock.json
+*API_KEY*
+*SECRET_KEY*
+*UID*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.log
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# C++
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+*.txt.log
+nohup.out
+
+# MetaTrader
+*.ex4
+*.ex5
+MQL4/Logs/
+MQL4/Files/
+Logs/
+
+# Trading Data
+*.csv
+*.dat
+*.history
+
+# Compiled Files
+*.pyc
+*.pyo
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# QuickFIX
+FIX*.log
+*.store
+
+# Ray RLlib / Training Outputs
+ray_results/
+checkpoints/
+checkpoint_*/
+tmp/
+
+# HTML Reports (optional - uncomment if you want to exclude)
+# *.htm
+# *.html

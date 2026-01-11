@@ -1,0 +1,7 @@
+# For bulk buy script
+nohup python3 20250426_bulk_buy.py > $(date +'%Y%m%d_%H%M%S')_bulk_buy.log 2>&1 &
+
+# For liquidation script
+nohup python3 20250426_liquidation.py > $(date +'%Y%m%d_%H%M%S')_liquidation.log 2>&1 &
+
+pkill -f python

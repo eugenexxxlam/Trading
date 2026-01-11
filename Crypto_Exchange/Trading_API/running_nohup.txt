@@ -1,0 +1,5 @@
+nohup python3 20241119_futures_b_multi.py > 20241119_futures_b_multi.log 2>&1 &
+
+sudo pkill python -f
+
+nohup python3 20241119_futures_d_multi.py 2>&1 | ts '%Y-%m-%d %H:%M:%S' > 20241119_futures_d_multi.log &

@@ -1,0 +1,11 @@
+##### head node
+ray start --head --port=6379 --num-cpus=8 --num-gpus=1
+
+##### worker node
+ray start --address=10.0.1.33:6379 --num-cpus=96
+
+tensorboard --logdir .
+
+watch -n 0.2 nvidia-smi
+
+htop
