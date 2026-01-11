@@ -8,8 +8,9 @@ This system provides comprehensive trading tools for cryptocurrency exchanges, f
 
 ## Exchange Details
 
-**Platform:** GAIA Exchange (gaiaex.com)
-**Authentication:** HMAC SHA256 signature-based authentication
+**Platform:** GAIA Exchange (gaiaex.com)  
+**API Documentation:** [Official GAIA Exchange API Docs](https://gaia-4.gitbook.io/gaiaex_api/)  
+**Authentication:** HMAC SHA256 signature-based authentication  
 **Supported Markets:** Spot Trading, Futures Trading
 
 ## Project Structure
@@ -20,9 +21,18 @@ Crypto_Exchange/
 │   ├── 1_connectivity.py            # Test API connectivity
 │   ├── 2_timestamp.py               # Check server time
 │   ├── 3_pair_list.py               # Fetch trading pairs
-│   ├── spot_*.py                    # Spot trading scripts
-│   ├── futures_*.py                 # Futures trading scripts
-│   └── 20250110_spot_API_development/ # Development scripts
+│   ├── spot_*.py                    # Spot trading scripts (60+ files)
+│   ├── futures_*.py                 # Futures trading scripts (17 files)
+│   └── Spot_API_testing_development/# Advanced trading algorithms
+│       ├── 1_fetch_account_info.py  # Account data fetching
+│       ├── 2_random_trading.py      # Random asset trading
+│       ├── 3_liquidation.py         # Position liquidation
+│       ├── 4*_spot_trading_loop.py  # Trading loop variations
+│       ├── 5_liquidation_20250427.py# Production liquidation
+│       ├── 6_bulk_buy_20250427.py   # Bulk buying strategy
+│       ├── 7_bulk_buy.py            # Enhanced bulk buy
+│       ├── 8_liquidation.py         # Advanced liquidation
+│       └── log/                     # Trading execution logs
 └── websocket/                       # WebSocket real-time data
     ├── 1_testing_volume.py          # Real-time volume monitoring
     └── 2_price_update.py            # Real-time price updates
@@ -95,11 +105,13 @@ Crypto_Exchange/
 
 **Bulk Operations**
 - `spot_20_chunk_trading.py` - Execute large orders in chunks
-- `20250110_spot_API_development/6_bulk_buy_20250427.py` - Buy all assets in loop with randomized volumes
+- `Spot_API_testing_development/6_bulk_buy_20250427.py` - Buy all assets in loop with randomized volumes
+- `Spot_API_testing_development/7_bulk_buy.py` - Enhanced bulk buying with logging
 
 **Advanced Strategies**
 - `spot_22_trading_algo.py` - Main trading algorithm with balance monitoring
-- `20250110_spot_API_development/4d_spot_trading_loop.py` - Full trading loop with automatic buying and periodic liquidation
+- `Spot_API_testing_development/4d_spot_trading_loop.py` - Full trading loop with automatic buying and periodic liquidation
+- `Spot_API_testing_development/2_random_trading.py` - Random asset selection and trading
 
 ### 5. WebSocket Real-Time Data
 
@@ -188,7 +200,17 @@ python Trading_API/spot_19_liquidation.py
 
 ### 5. Run Automated Trading Loop
 ```bash
-python Trading_API/20250110_spot_API_development/4d_spot_trading_loop.py
+python Trading_API/Spot_API_testing_development/4d_spot_trading_loop.py
+```
+
+### 6. Fetch Account Information
+```bash
+python Trading_API/Spot_API_testing_development/1_fetch_account_info.py
+```
+
+### 7. Execute Bulk Buying Strategy
+```bash
+python Trading_API/Spot_API_testing_development/7_bulk_buy.py
 ```
 
 ## Key Parameters
@@ -315,14 +337,33 @@ symbol_name_mapping = {
 - **Connection Reuse:** Persistent WebSocket connections
 - **Efficient Polling:** Configurable intervals to minimize API calls
 
-## Development Folder
+## Development & Testing Folder
 
-`20250110_spot_API_development/` contains:
-- Experimental trading scripts
-- Enhanced versions with logging
-- Bulk buy/liquidation strategies
-- Trading loop implementations
-- Test files and logs
+`Spot_API_testing_development/` contains advanced production-ready trading algorithms:
+
+**Account Management:**
+- `1_fetch_account_info.py` - Comprehensive account data retrieval
+- `1b_fetch_account_info_symbol_name.py` - Symbol-specific account info
+
+**Trading Strategies:**
+- `2_random_trading.py` - Random asset selection and execution
+- `4_spot_trading_loop.py` to `4d_spot_trading_loop.py` - Multiple trading loop implementations
+
+**Liquidation Strategies:**
+- `3_liquidation.py` - Basic position liquidation
+- `5_liquidation_20250427.py` - Enhanced liquidation with date stamping
+- `8_liquidation.py` - Advanced liquidation algorithm
+
+**Bulk Operations:**
+- `6_bulk_buy_20250427.py` - Production bulk buying (executed on 2025-04-27)
+- `7_bulk_buy.py` - Enhanced bulk buying with comprehensive logging
+
+**Execution Logs:**
+- `log/` - Contains detailed trading execution logs with timestamps
+  - `20250527_170847_bulk_buy.log` - 1.9M lines of bulk buy execution
+  - `20250527_171103_liquidation.log` - 1.8M lines of liquidation execution
+  - `20250619_054051_liquidation.log` - Recent liquidation logs
+  - `20250619_054116_bulk_buy.log` - Recent bulk buy logs
 
 ## Notes
 
@@ -333,6 +374,25 @@ symbol_name_mapping = {
 - Understand liquidation mechanisms before automated trading
 - WebSocket connections require ping/pong to stay alive
 - All timestamps must be in milliseconds
+
+## Resources
+
+**Official Documentation:**
+- [GAIA Exchange API Documentation](https://gaia-4.gitbook.io/gaiaex_api/) - Complete API reference with endpoints, authentication, and examples
+- [GAIA Exchange Website](https://www.gaiaex.com) - Trading platform
+
+**API Endpoints:**
+- Base URL (Spot): `https://openapi.gaiaex.com`
+- Base URL (Futures): `https://futuresopenapi.gaiaex.com`
+- WebSocket: `wss://ws.gaiaex.com/kline-api/ws`
+
+**Key Documentation Sections:**
+- [OpenAPI Basic Information](https://gaia-4.gitbook.io/gaiaex_api/) - Authentication and request signing
+- [Spot Trading Endpoints](https://gaia-4.gitbook.io/gaiaex_api/spot-trade) - Order placement and management
+- [Contract Trading Endpoints](https://gaia-4.gitbook.io/gaiaex_api/contract-trade) - Futures trading
+- [WebSocket Streams](https://gaia-4.gitbook.io/gaiaex_api/websocket) - Real-time data feeds
+
+---
 
 ## Disclaimer
 
