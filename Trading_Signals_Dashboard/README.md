@@ -12,6 +12,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Dashboard Preview](#dashboard-preview)
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
 - [Technical Indicators](#technical-indicators)
@@ -42,6 +43,13 @@ The **Ichimoku Multi-Timeframe Dashboard** is an enterprise-grade technical anal
 **Adaptive Volatility Filter**: Revolutionary asymmetric ATR percentage filter that dynamically adjusts signal strength based on daily range consumption, preventing late entries while identifying reversal opportunities.
 
 **Real-Time Price Ladder**: Automatically sorted visualization of 24 key Ichimoku price levels across all timeframes, providing instant support/resistance zone identification.
+
+---
+
+## Dashboard Preview
+
+![Trading Signals Dashboard](reference/Dashboard.jpeg)
+*Professional multi-timeframe technical analysis dashboard showing 184 signals across 8 timeframes with real-time probability scoring*
 
 ---
 
@@ -466,6 +474,7 @@ Trend S/M/L: BULL/BULL/NEUT
    - Dashboard should appear in upper-left corner
    - Check Expert tab for initialization messages
    - Confirm ATR values are updating
+   - See [Dashboard Preview](#dashboard-preview) for expected visual layout
 
 ---
 
