@@ -18,7 +18,7 @@ Comprehensive trading technology stack encompassing exchange connectivity, insti
 | **RL Trading Agent** | Linux AWS EC2 with GPU | Install Ray/TensorFlow → Run training script |
 | **MT4 Strategies** | MetaTrader 4 platform | Copy `.mq4` to Experts folder → Compile & backtest |
 
-📖 **Detailed prerequisites in [Getting Started](#getting-started---prerequisites) section below.**
+**Detailed prerequisites in [Getting Started](#getting-started---prerequisites) section below.**
 
 ---
 
@@ -32,7 +32,7 @@ This repository contains a complete end-to-end trading technology ecosystem, fro
 
 **Cryptocurrency Exchange Integration & Order Execution Infrastructure**
 
-> **⚠️ Prerequisites:** Exchange API credentials required (API Key + Secret Key from Binance, GAIA Exchange, or similar)
+> **Prerequisites:** Exchange API credentials required (API Key + Secret Key from Binance, GAIA Exchange, or similar)
 
 Production-ready connectivity infrastructure for digital asset exchanges, implementing authenticated REST APIs, real-time WebSocket data feeds, and order lifecycle management. System handles high-throughput trading operations with comprehensive position and risk management.
 
@@ -53,7 +53,7 @@ Production-ready connectivity infrastructure for digital asset exchanges, implem
 
 **Tech Stack:** Python, REST APIs, WebSocket Protocol, HMAC Authentication, Multi-Threading, Logging
 
-📂 [`Crypto_Exchange/`](Crypto_Exchange/) | 📖 [**Detailed Documentation →**](Crypto_Exchange/README.md)
+[`Crypto_Exchange/`](Crypto_Exchange/) | [**Detailed Documentation →**](Crypto_Exchange/README.md)
 
 ---
 
@@ -61,7 +61,7 @@ Production-ready connectivity infrastructure for digital asset exchanges, implem
 
 **FIX Protocol Implementation for Institutional Connectivity**
 
-> **⚠️ Prerequisites:** FIX API account from institutional broker (requires API credentials and FIX session configuration)
+> **Prerequisites:** FIX API account from institutional broker (requires API credentials and FIX session configuration)
 
 Multi-language implementation of the Financial Information eXchange (FIX) protocol—the global standard for institutional trading connectivity. Provides complete order routing infrastructure for prime brokerages, dark pools, and institutional execution venues.
 
@@ -87,7 +87,7 @@ Multi-language implementation of the Financial Information eXchange (FIX) protoc
 
 **Tech Stack:** QuickFIX Engine, C++, Java, Python, FIX Protocol 4.2/4.4, TCP Sockets, Multi-Threading
 
-📂 [`FIX_protocol_quickfix/`](FIX_protocol_quickfix/) | 📖 [**Detailed Documentation →**](FIX_protocol_quickfix/README.md)
+[`FIX_protocol_quickfix/`](FIX_protocol_quickfix/) | [**Detailed Documentation →**](FIX_protocol_quickfix/README.md)
 
 ---
 
@@ -95,7 +95,7 @@ Multi-language implementation of the Financial Information eXchange (FIX) protoc
 
 **Sell-Side Matching Engine & Market Making Infrastructure**
 
-> **✅ Prerequisites:** C++20 compiler (GCC 10+/Clang 12+), CMake 3.5+, Ninja build system — **No external API required** (runs locally)
+> **Prerequisites:** C++20 compiler (GCC 10+/Clang 12+), CMake 3.5+, Ninja build system — **No external API required** (runs locally)
 
 Complete exchange infrastructure built in C++20, optimized for sub-microsecond order book operations. Implements both sell-side (exchange) and buy-side (trading) components with institutional-grade performance characteristics suitable for high-frequency trading operations.
 
@@ -160,7 +160,7 @@ Complete exchange infrastructure built in C++20, optimized for sub-microsecond o
 
 **Tech Stack:** C++20, Lock-Free Data Structures, TCP/UDP Sockets, Multicast, Memory Pools, CMake, Ninja
 
-📂 [`Low_Latency_concept/cpp/`](Low_Latency_concept/cpp/) | 📖 [**Detailed Documentation →**](Low_Latency_concept/cpp/README.md)
+[`Low_Latency_concept/cpp/`](Low_Latency_concept/cpp/) | [**Detailed Documentation →**](Low_Latency_concept/cpp/README.md)
 
 ---
 
@@ -168,7 +168,7 @@ Complete exchange infrastructure built in C++20, optimized for sub-microsecond o
 
 **Quantitative Technical Analysis & Feature Engineering**
 
-> **✅ Prerequisites:** MetaTrader 4 platform — Download `.mq4` file to MT4 `Experts` folder and compile in MetaEditor
+> **Prerequisites:** MetaTrader 4 platform — Download `.mq4` file to MT4 `Experts` folder and compile in MetaEditor
 
 Enterprise-grade signal generation infrastructure implementing 23 technical indicators across 8 timeframes, producing a 184-dimensional feature space for systematic trading strategies and machine learning models. Real-time calculation engine with probabilistic scoring framework.
 
@@ -222,7 +222,7 @@ Enterprise-grade signal generation infrastructure implementing 23 technical indi
 
 **Tech Stack:** MQL4, MetaTrader 4, Technical Analysis Library, Real-Time Signal Processing
 
-📂 [`Trading_Signals_Dashboard/`](Trading_Signals_Dashboard/) | 📖 [**Detailed Documentation →**](Trading_Signals_Dashboard/README.md)
+[`Trading_Signals_Dashboard/`](Trading_Signals_Dashboard/) | [**Detailed Documentation →**](Trading_Signals_Dashboard/README.md)
 
 ---
 
@@ -230,7 +230,7 @@ Enterprise-grade signal generation infrastructure implementing 23 technical indi
 
 **Adaptive AI Agents for Systematic Alpha Generation**
 
-> **⚠️ Prerequisites:** Linux environment with NVIDIA GPU (AWS EC2 recommended: p3.2xlarge or g4dn.xlarge) — Check with `nvidia-smi`
+> **Prerequisites:** Linux environment with NVIDIA GPU (AWS EC2 recommended: p3.2xlarge or g4dn.xlarge) — Check with `nvidia-smi`
 
 Advanced machine learning infrastructure implementing deep reinforcement learning for autonomous trading strategy discovery. System learns optimal execution policies from historical market data, adapting to regime changes and market microstructure without human-coded rules.
 
@@ -320,7 +320,7 @@ Advanced machine learning infrastructure implementing deep reinforcement learnin
 
 **Tech Stack:** Python, Ray RLlib, TensorFlow 2, OpenAI Gym, LSTM, IMPALA, Distributed Computing, ccxt, pybit
 
-📂 [`Reinforcement_Learning/`](Reinforcement_Learning/) | 📖 [**Detailed Documentation →**](Reinforcement_Learning/README.md)
+[`Reinforcement_Learning/`](Reinforcement_Learning/) | [**Detailed Documentation →**](Reinforcement_Learning/README.md)
 
 ---
 
@@ -328,7 +328,7 @@ Advanced machine learning infrastructure implementing deep reinforcement learnin
 
 **Multi-Asset Algorithmic Trading Strategies with Statistical Validation**
 
-> **✅ Prerequisites:** MetaTrader 4 platform with Strategy Tester — Copy `.mq4` Expert Advisors to MT4 and run backtests
+> **Prerequisites:** MetaTrader 4 platform with Strategy Tester — Copy `.mq4` Expert Advisors to MT4 and run backtests
 
 Comprehensive backtesting framework implementing systematic multi-indicator strategies across multiple asset classes. Rigorous statistical validation using MetaTrader 4's tick-by-tick strategy tester with modeling quality of 99.9%.
 
@@ -411,7 +411,7 @@ Comprehensive backtesting framework implementing systematic multi-indicator stra
 
 **Tech Stack:** MQL4, MetaTrader 4 Strategy Tester, Statistical Analysis, Monte Carlo Simulation
 
-📂 [`Trading_Strategy/`](Trading_Strategy/) | 📖 [**Detailed Documentation →**](Trading_Strategy/README.md)
+[`Trading_Strategy/`](Trading_Strategy/) | [**Detailed Documentation →**](Trading_Strategy/README.md)
 
 ---
 
