@@ -4,7 +4,7 @@ Multi-language implementation of the Financial Information eXchange (FIX) protoc
 
 ## Overview
 
-This project demonstrates comprehensive FIX protocol implementations across three programming languages (C++, Java, Python), showcasing order matching engines, execution simulators, and trading clients for institutional trading systems.
+This project demonstrates comprehensive FIX protocol implementations across four programming languages (C++, Java, Python, Rust), showcasing order matching engines, execution simulators, and trading clients for institutional trading systems.
 
 ## FIX Protocol
 
@@ -30,8 +30,16 @@ FIX_protocol_quickfix/
 │   ├── banzai/                # GUI trading application
 │   ├── executor/              # Order execution engine
 │   └── ordermatch/            # Order matching system
-└── Python_example/            # Python Implementation
-    └── executor.py            # Simple order executor
+├── Python_example/            # Python Implementation
+│   └── executor.py            # Simple order executor
+└── Rust_example/              # Rust Implementation
+    ├── demo_config.rs         # Programmatic configuration example
+    ├── fix_getting_started.rs # Basic FIX acceptor
+    └── fix_repl/              # Interactive FIX REPL
+        ├── main.rs            # REPL entry point
+        ├── fix_app.rs         # FIX application callbacks
+        ├── command_parser.rs  # Command parsing
+        └── command_exec.rs    # Command execution
 ```
 
 ## Components
@@ -205,7 +213,138 @@ cd Java_Banzai/ordermatch
 java -cp quickfixj.jar:. quickfix.examples.ordermatch.Main config.cfg
 ```
 
-### 3. Python Implementation
+### 3. Rust Implementation
+
+Modern, safe, and performant FIX implementation using the quickfix-rs library.
+
+#### Demo Config (demo_config.rs)
+Demonstrates programmatic FIX acceptor configuration without external config files.
+
+**Features:**
+- Build SessionSettings in code (no config file needed)
+- Demonstrates all configuration options
+- Memory-based message store
+- Screen logging
+- Custom application callbacks
+
+**Key Concepts:**
+- SessionSettings builder pattern
+- Acceptor initialization
+- Session lifecycle management
+- Programmatic configuration vs file-based
+
+**Build & Run:**
+```bash
+cd Rust_example
+cargo build --release
+cargo run --bin demo_config
+```
+
+**Configuration Example:**
+```rust
+let mut settings = SessionSettings::new();
+settings.set(SessionID::default(), "ConnectionType", "acceptor")?;
+settings.set(SessionID::default(), "SocketAcceptPort", "5001")?;
+settings.set(SessionID::default(), "StartTime", "00:00:00")?;
+```
+
+#### Getting Started (fix_getting_started.rs)
+Basic FIX acceptor that loads configuration from file.
+
+**Features:**
+- File-based configuration
+- Simple acceptor setup
+- Message store and logger initialization
+- Minimal application callbacks
+- Clean shutdown handling
+
+**Use Cases:**
+- Learning FIX protocol basics
+- Testing FIX connectivity
+- Template for new projects
+- Configuration file examples
+
+**Build & Run:**
+```bash
+cd Rust_example
+cargo run --bin fix_getting_started
+```
+
+**Configuration File:**
+```ini
+[DEFAULT]
+ConnectionType=acceptor
+SocketAcceptPort=5001
+FileStorePath=target/store
+FileLogPath=target/log
+
+[SESSION]
+BeginString=FIX.4.2
+SenderCompID=ACCEPTOR
+TargetCompID=INITIATOR
+```
+
+#### FIX REPL (Interactive Shell)
+Interactive command-line tool for manual FIX testing and debugging.
+
+**Features:**
+- Interactive command shell
+- Send arbitrary FIX messages
+- Session management (logon/logout)
+- Message inspection
+- Command history
+- Both initiator and acceptor modes
+
+**Commands:**
+- `send_to <SessionID> <FIXMessage>` - Send FIX message
+- `sessions` - List active sessions
+- `quit` - Exit REPL
+
+**Architecture:**
+- `main.rs` - Entry point and server loop
+- `fix_app.rs` - FIX application callbacks
+- `command_parser.rs` - Command parsing logic
+- `command_exec.rs` - Command execution
+
+**Build & Run (Acceptor Mode):**
+```bash
+cd Rust_example
+cargo run --bin fix_repl -- acceptor configs/acceptor.cfg
+```
+
+**Build & Run (Initiator Mode):**
+```bash
+cargo run --bin fix_repl -- initiator configs/initiator.cfg
+```
+
+**Example Usage:**
+```
+FIX REPL> sessions
+Active sessions:
+  - FIX.4.2:CLIENT->SERVER
+
+FIX REPL> send_to FIX.4.2:CLIENT->SERVER 35=D|55=AAPL|54=1|38=100|40=2|44=150.50
+Sent: NewOrderSingle for AAPL
+
+FIX REPL> quit
+```
+
+**Key Rust Features:**
+- Type-safe FIX message handling
+- Zero-copy message parsing where possible
+- Thread-safe session management
+- Memory safety without garbage collection
+- Pattern matching for message routing
+- Result-based error handling
+
+**Rust-Specific Advantages:**
+- Compile-time guarantees for memory safety
+- No runtime overhead (zero-cost abstractions)
+- Fearless concurrency
+- Modern tooling (Cargo, rustfmt, clippy)
+- Excellent performance (comparable to C++)
+
+### 4. Python Implementation
 
 Lightweight executor for rapid prototyping and testing.
 
@@ -402,6 +541,12 @@ Result: 150 shares @ 100.3 (ask price)
 - QuickFIX/J library
 - Maven or Ant (optional, for build automation)
 
+### Rust Implementation
+- Rust 1.70+ (2021 edition)
+- Cargo (Rust package manager)
+- quickfix-rs crate
+- Install Rust: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
 ### Python Implementation
 - Python 2.7+ or Python 3.x
 - quickfix Python module
@@ -494,6 +639,13 @@ Create test scripts that:
 - JMX monitoring overhead minimal
 - Good for trading desk applications
 
+### Rust Implementation
+- Near C++ performance with memory safety
+- Zero-cost abstractions
+- Thread-safe by default (compiler enforced)
+- Excellent for production high-frequency systems
+- Modern development experience
+
 ### Python Implementation
 - Quick prototyping and testing
 - Not optimized for high frequency
@@ -506,6 +658,7 @@ Create test scripts that:
 - **FIX Trading Community:** https://www.fixtrading.org/
 - **FIX Protocol Specifications:** https://www.fixtrading.org/standards/
 - **QuickFIX/J (Java):** http://www.quickfixj.org/
+- **quickfix-rs (Rust):** https://github.com/arthurlm/quickfix-rs
 - **FIX Data Dictionary:** Standard field definitions and message formats
 
 ## License
