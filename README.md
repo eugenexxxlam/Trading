@@ -6,6 +6,22 @@ Comprehensive trading technology stack encompassing exchange connectivity, insti
 
 ---
 
+## Quick Start Guide
+
+**"How do I use this code?"**
+
+| Component | What You Need | Quick Setup |
+|-----------|--------------|-------------|
+| **Crypto Exchange** | Exchange API Key (Binance, etc.) | Configure credentials → Run Python scripts |
+| **FIX Protocol** | FIX API account from broker | Configure FIX settings → Compile & run C++/Java client |
+| **Low-Latency Engine** | C++20 compiler | Run `./scripts/build.sh` → Start exchange locally |
+| **RL Trading Agent** | Linux AWS EC2 with GPU | Install Ray/TensorFlow → Run training script |
+| **MT4 Strategies** | MetaTrader 4 platform | Copy `.mq4` to Experts folder → Compile & backtest |
+
+📖 **Detailed prerequisites in [Getting Started](#getting-started---prerequisites) section below.**
+
+---
+
 ## System Architecture Overview
 
 This repository contains a complete end-to-end trading technology ecosystem, from electronic market connectivity through institutional execution infrastructure to sell-side exchange systems and adaptive AI trading agents. Each component represents production-ready implementations of critical trading infrastructure used in modern quantitative trading operations.
@@ -15,6 +31,8 @@ This repository contains a complete end-to-end trading technology ecosystem, fro
 ## 1. Electronic Market Connectivity Layer
 
 **Cryptocurrency Exchange Integration & Order Execution Infrastructure**
+
+> **⚠️ Prerequisites:** Exchange API credentials required (API Key + Secret Key from Binance, GAIA Exchange, or similar)
 
 Production-ready connectivity infrastructure for digital asset exchanges, implementing authenticated REST APIs, real-time WebSocket data feeds, and order lifecycle management. System handles high-throughput trading operations with comprehensive position and risk management.
 
@@ -42,6 +60,8 @@ Production-ready connectivity infrastructure for digital asset exchanges, implem
 ## 2. Institutional Execution Protocol Layer
 
 **FIX Protocol Implementation for Institutional Connectivity**
+
+> **⚠️ Prerequisites:** FIX API account from institutional broker (requires API credentials and FIX session configuration)
 
 Multi-language implementation of the Financial Information eXchange (FIX) protocol—the global standard for institutional trading connectivity. Provides complete order routing infrastructure for prime brokerages, dark pools, and institutional execution venues.
 
@@ -74,6 +94,8 @@ Multi-language implementation of the Financial Information eXchange (FIX) protoc
 ## 3. Ultra-Low-Latency Exchange Infrastructure
 
 **Sell-Side Matching Engine & Market Making Infrastructure**
+
+> **✅ Prerequisites:** C++20 compiler (GCC 10+/Clang 12+), CMake 3.5+, Ninja build system — **No external API required** (runs locally)
 
 Complete exchange infrastructure built in C++20, optimized for sub-microsecond order book operations. Implements both sell-side (exchange) and buy-side (trading) components with institutional-grade performance characteristics suitable for high-frequency trading operations.
 
@@ -146,6 +168,8 @@ Complete exchange infrastructure built in C++20, optimized for sub-microsecond o
 
 **Quantitative Technical Analysis & Feature Engineering**
 
+> **✅ Prerequisites:** MetaTrader 4 platform — Download `.mq4` file to MT4 `Experts` folder and compile in MetaEditor
+
 Enterprise-grade signal generation infrastructure implementing 23 technical indicators across 8 timeframes, producing a 184-dimensional feature space for systematic trading strategies and machine learning models. Real-time calculation engine with probabilistic scoring framework.
 
 **Indicator Suite:**
@@ -205,6 +229,8 @@ Enterprise-grade signal generation infrastructure implementing 23 technical indi
 ## 5. Autonomous Trading via Deep Reinforcement Learning
 
 **Adaptive AI Agents for Systematic Alpha Generation**
+
+> **⚠️ Prerequisites:** Linux environment with NVIDIA GPU (AWS EC2 recommended: p3.2xlarge or g4dn.xlarge) — Check with `nvidia-smi`
 
 Advanced machine learning infrastructure implementing deep reinforcement learning for autonomous trading strategy discovery. System learns optimal execution policies from historical market data, adapting to regime changes and market microstructure without human-coded rules.
 
@@ -301,6 +327,8 @@ Advanced machine learning infrastructure implementing deep reinforcement learnin
 ## 6. Systematic Strategy Backtesting & Validation
 
 **Multi-Asset Algorithmic Trading Strategies with Statistical Validation**
+
+> **✅ Prerequisites:** MetaTrader 4 platform with Strategy Tester — Copy `.mq4` Expert Advisors to MT4 and run backtests
 
 Comprehensive backtesting framework implementing systematic multi-indicator strategies across multiple asset classes. Rigorous statistical validation using MetaTrader 4's tick-by-tick strategy tester with modeling quality of 99.9%.
 
@@ -435,6 +463,48 @@ The technology stack represents a complete end-to-end trading infrastructure:
 6. **Performance Validation** → Statistical backtesting with tick-by-tick precision
 
 Each layer provides abstraction and services to the layers above, enabling modular development of sophisticated trading strategies while maintaining institutional-grade performance and reliability.
+
+---
+
+## Getting Started - Prerequisites
+
+Before using any component, ensure you have the following prerequisites:
+
+### 1. Crypto Exchange Connectivity
+**Required:** Exchange API credentials (API Key + Secret Key)
+- Create an account on a cryptocurrency exchange (e.g., Binance, GAIA Exchange)
+- Generate API keys from your account dashboard
+- Configure credentials in `Crypto_Exchange/Trading_API/UID*.json`
+- **Language:** Python 3.8+
+
+### 2. FIX Protocol Integration
+**Required:** FIX API account with institutional broker
+- Obtain FIX API credentials from your broker/prime broker
+- Configure FIX session settings (Host, Port, SenderCompID, TargetCompID)
+- **Languages:** C++ (QuickFIX), Java (QuickFIX/J), or Python (quickfix)
+- **Note:** This is institutional infrastructure - retail traders typically don't have FIX API access
+
+### 3. Low-Latency Exchange Infrastructure
+**Required:** C++20 compiler, CMake, Linux/macOS
+- No external API needed (self-contained matching engine)
+- **Compiler:** GCC 10+ or Clang 12+
+- **Build Tools:** CMake 3.5+, Ninja
+- Runs locally for simulation and testing
+
+### 4. Reinforcement Learning Agent Training
+**Required:** Linux environment with NVIDIA GPU (recommended)
+- **Hardware:** AWS EC2 instance with GPU (e.g., p3.2xlarge, g4dn.xlarge)
+- **Software:** CUDA toolkit, nvidia-smi driver
+- **Python:** 3.8+ with Ray, TensorFlow 2, CUDA support
+- **Note:** CPU-only training is possible but significantly slower
+
+### 5. Trading Signals Dashboard & Backtesting Strategies
+**Required:** MetaTrader 4 terminal
+- Download and install MetaTrader 4 from your broker or MetaQuotes
+- Copy `.mq4` files to MT4's `Experts` folder
+- Compile in MetaEditor (F7)
+- Load Expert Advisor on charts or run in Strategy Tester
+- **Platform:** Windows (or Wine on Linux/macOS)
 
 ---
 
