@@ -30,7 +30,7 @@
  * Connection 1: Order C (timestamp 1001 ns)
  * 
  * Without sequencing: Process A, B, C (connection order)
- * With sequencing: Process B (999), A (1000), C (1001) ✓
+ * With sequencing: Process B (999), A (1000), C (1001) 
  * ```
  * 
  * FAIRNESS:

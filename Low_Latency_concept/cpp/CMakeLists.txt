@@ -27,6 +27,10 @@ target_link_libraries(exchange_main PUBLIC ${LIBS})
 add_executable(trading_main trading/trading_main.cpp)
 target_link_libraries(trading_main PUBLIC ${LIBS})
 
+# Modern C++20 version
+add_executable(trading_main_modern trading/trading_main_modern.cpp)
+target_link_libraries(trading_main_modern PUBLIC ${LIBS})
+
 add_executable(logger_benchmark benchmarks/logger_benchmark.cpp)
 target_link_libraries(logger_benchmark PUBLIC ${LIBS})
 

@@ -11,30 +11,30 @@
  * Trading Clients (External)
  *         |
  *         | TCP (Orders/Cancels)
- *         ↓
- *   ┌─────────────────┐
- *   │  Order Server   │ ← Receives client orders via TCP
- *   └────────┬────────┘
- *            │ Lock-free Queue (ClientRequests)
- *            ↓
- *   ┌─────────────────┐
- *   │ Matching Engine │ ← Matches orders, maintains order book
- *   └────┬────────┬───┘
- *        │        │
- *        │        │ Lock-free Queue (ClientResponses)
- *        │        ↓
- *        │   ┌─────────────────┐
- *        │   │  Order Server   │ → Sends execution reports to clients
- *        │   └─────────────────┘
- *        │
- *        │ Lock-free Queue (MarketUpdates)
- *        ↓
- *   ┌─────────────────────────┐
- *   │ Market Data Publisher   │ → Broadcasts to all subscribers
- *   └─────────────────────────┘
+ *         
+ *   
+ *     Order Server     Receives client orders via TCP
+ *   
+ *             Lock-free Queue (ClientRequests)
+ *            
+ *   
+ *    Matching Engine   Matches orders, maintains order book
+ *   
+ *                
+ *                 Lock-free Queue (ClientResponses)
+ *                
+ *           
+ *             Order Server     Sends execution reports to clients
+ *           
+ *        
+ *         Lock-free Queue (MarketUpdates)
+ *        
+ *   
+ *    Market Data Publisher     Broadcasts to all subscribers
+ *   
  *            |
  *            | Multicast UDP (Market Data)
- *            ↓
+ *            
  *   Trading Clients (External)
  * ```
  * 

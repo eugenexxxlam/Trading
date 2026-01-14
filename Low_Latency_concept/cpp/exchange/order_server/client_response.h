@@ -32,10 +32,10 @@ using namespace Common;
  * CLIENT STATE MACHINE:
  * ```
  * PENDING (sent NEW)
- *    ↓
+ *    
  * ACCEPTED (order in book)
- *    ↓
- * FILLED (partial) → More FILLEDs → FILLED (complete)
+ *    
+ * FILLED (partial)  More FILLEDs  FILLED (complete)
  * or
  * CANCELED (removed)
  * ```

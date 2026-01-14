@@ -47,10 +47,10 @@
  * vs. UNICAST (TCP):
  * ```
  * Exchange
- *  ├─[TCP]─> Trader1
- *  ├─[TCP]─> Trader2
- *  ├─[TCP]─> Trader3
- *  └─[TCP]─> ... 1000 connections!
+ *  [TCP]> Trader1
+ *  [TCP]> Trader2
+ *  [TCP]> Trader3
+ *  [TCP]> ... 1000 connections!
  * (Server sends 1000 copies, 1000x network traffic)
  * ```
  * 

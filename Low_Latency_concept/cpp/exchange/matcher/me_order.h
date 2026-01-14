@@ -19,11 +19,11 @@ using namespace Common;
  * ```
  * BIDS (descending price):        ASKS (ascending price):
  * $150.00 (best bid)              $150.05 (best ask)
- *   ├─ Order 1 (100 shares)        ├─ Order 5 (50 shares)
- *   ├─ Order 2 (200 shares)        └─ Order 6 (150 shares)
- *   └─ Order 3 (50 shares)       $150.10
- * $149.95                           └─ Order 7 (100 shares)
- *   └─ Order 4 (300 shares)
+ *    Order 1 (100 shares)         Order 5 (50 shares)
+ *    Order 2 (200 shares)         Order 6 (150 shares)
+ *    Order 3 (50 shares)       $150.10
+ * $149.95                            Order 7 (100 shares)
+ *    Order 4 (300 shares)
  * ```
  * 
  * TIME-PRICE PRIORITY:
@@ -340,26 +340,26 @@ namespace Exchange {
  *    - Delete: O(1) anywhere (cancel order)
  *    - Traverse: O(N) for matching (acceptable)
  *    - Memory: Pool-allocated (predictable)
- *    ✓ Best for frequent inserts/deletes
+ *     Best for frequent inserts/deletes
  * 
  *    std::vector:
  *    - Insert: O(1) amortized at end, O(N) in middle
  *    - Delete: O(N) (shift elements)
  *    - Lookup: O(1) by index, O(N) by value
  *    - Memory: Reallocation (latency spikes)
- *    ✗ Delete performance unacceptable
+ *     Delete performance unacceptable
  * 
  *    std::list:
  *    - Insert/Delete: O(1)
  *    - Memory: Heap allocation per node
  *    - Predictability: Non-deterministic (allocator)
- *    ✗ Heap allocation unacceptable for HFT
+ *     Heap allocation unacceptable for HFT
  * 
  *    Array + Free List:
  *    - Insert/Delete: O(1)
  *    - Memory: Pre-allocated (good)
  *    - Complexity: More code (manual management)
- *    ✓ Viable alternative, more complex
+ *     Viable alternative, more complex
  * 
  * 2. CIRCULAR vs NULL-TERMINATED LISTS:
  * 
@@ -368,14 +368,14 @@ namespace Exchange {
  *    - First->prev points to last
  *    - Single pointer tracks list (first)
  *    - Insert at end: first->prev->next = new (no traversal)
- *    ✓ O(1) insert at end without tail pointer
+ *     O(1) insert at end without tail pointer
  * 
  *    NULL-terminated:
  *    - Last->next = nullptr
  *    - First->prev = nullptr
  *    - Need both head and tail pointers
  *    - Insert at end: tail->next = new
- *    ✗ Requires two pointers (more memory)
+ *     Requires two pointers (more memory)
  * 
  * 3. MEMORY POOL vs HEAP ALLOCATION:
  * 
@@ -385,14 +385,14 @@ namespace Exchange {
  *    - Deallocation: O(1) return to pool
  *    - Latency: Predictable (no heap)
  *    - Fragmentation: None (reuse slots)
- *    ✓ Required for HFT (deterministic latency)
+ *     Required for HFT (deterministic latency)
  * 
  *    Heap Allocation (new/delete):
  *    - Allocation: O(1) average, O(N) worst case
  *    - Deallocation: O(1) average
  *    - Latency: Unpredictable (allocator locks)
  *    - Fragmentation: Increases over time
- *    ✗ Unacceptable for HFT
+ *     Unacceptable for HFT
  * 
  * 4. HASH MAPS vs RED-BLACK TREES:
  * 
@@ -401,14 +401,14 @@ namespace Exchange {
  *    - Insert/Delete: O(1) average
  *    - Memory: Fixed array (predictable)
  *    - Simple: Direct indexing
- *    ✓ Best for order lookup (known ID)
+ *     Best for order lookup (known ID)
  * 
  *    Red-Black Trees (std::map):
  *    - Lookup: O(log N)
  *    - Insert/Delete: O(log N)
  *    - Memory: Node allocation (heap)
  *    - Sorted: Maintains order
- *    ✗ Slower and heap allocation
+ *     Slower and heap allocation
  *    (But useful for price levels if traversal needed)
  * 
  * PERFORMANCE SUMMARY:

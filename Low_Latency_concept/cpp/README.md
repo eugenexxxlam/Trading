@@ -24,52 +24,52 @@ The system consists of two main components that communicate over TCP and multica
 
 ```
 cpp_simple_example/
-├── common/                          # Shared utilities and data structures
-│   ├── lf_queue.h                   # Lock-free SPSC queue
-│   ├── mem_pool.h                   # Memory pool allocator
-│   ├── logging.h                    # Asynchronous logger
-│   ├── tcp_socket.h/cpp             # TCP socket utilities
-│   ├── mcast_socket.h/cpp           # Multicast socket utilities
-│   ├── thread_utils.h               # Thread management
-│   ├── time_utils.h                 # High-resolution time utilities
-│   └── types.h                      # Common type definitions
-├── exchange/                        # Exchange components
-│   ├── matcher/                     # Order matching engine
-│   │   ├── matching_engine.h/cpp    # Main matching engine
-│   │   ├── me_order_book.h/cpp      # Limit order book
-│   │   └── me_order.h/cpp           # Order representation
-│   ├── order_server/                # Order gateway server
-│   │   ├── order_server.h/cpp       # TCP order server
-│   │   ├── client_request.h         # Incoming client requests
-│   │   ├── client_response.h        # Outgoing execution reports
-│   │   └── fifo_sequencer.h         # Order sequencer
-│   └── market_data/                 # Market data distribution
-│       ├── market_data_publisher.h/cpp    # Multicast publisher
-│       ├── snapshot_synthesizer.h/cpp     # Snapshot generator
-│       └── market_update.h          # Market update messages
-├── trading/                         # Trading client components
-│   ├── strategy/                    # Trading algorithms
-│   │   ├── trade_engine.h/cpp       # Main trading engine
-│   │   ├── market_maker.h/cpp       # Market making strategy
-│   │   ├── liquidity_taker.h/cpp    # Liquidity taking strategy
-│   │   ├── feature_engine.h         # Feature calculation
-│   │   ├── order_manager.h/cpp      # Order management
-│   │   ├── risk_manager.h/cpp       # Pre-trade risk checks
-│   │   └── position_keeper.h        # Position tracking
-│   ├── order_gw/                    # Order gateway client
-│   │   └── order_gateway.h/cpp      # TCP order client
-│   └── market_data/                 # Market data consumer
-│       └── market_data_consumer.h/cpp     # Multicast consumer
-├── benchmarks/                      # Performance benchmarks
-│   ├── logger_benchmark.cpp         # Logging performance
-│   ├── hash_benchmark.cpp           # Hash map performance
-│   └── release_benchmark.cpp        # Overall system benchmark
-├── notebooks/                       # Performance analysis
-│   └── perf_analysis.ipynb          # Jupyter notebook analysis
-└── scripts/                         # Build and run scripts
-    ├── build.sh                     # Build release and debug
-    ├── run_exchange_and_clients.sh  # Run complete system
-    └── run_benchmarks.sh            # Run performance tests
+ common/                          # Shared utilities and data structures
+    lf_queue.h                   # Lock-free SPSC queue
+    mem_pool.h                   # Memory pool allocator
+    logging.h                    # Asynchronous logger
+    tcp_socket.h/cpp             # TCP socket utilities
+    mcast_socket.h/cpp           # Multicast socket utilities
+    thread_utils.h               # Thread management
+    time_utils.h                 # High-resolution time utilities
+    types.h                      # Common type definitions
+ exchange/                        # Exchange components
+    matcher/                     # Order matching engine
+       matching_engine.h/cpp    # Main matching engine
+       me_order_book.h/cpp      # Limit order book
+       me_order.h/cpp           # Order representation
+    order_server/                # Order gateway server
+       order_server.h/cpp       # TCP order server
+       client_request.h         # Incoming client requests
+       client_response.h        # Outgoing execution reports
+       fifo_sequencer.h         # Order sequencer
+    market_data/                 # Market data distribution
+        market_data_publisher.h/cpp    # Multicast publisher
+        snapshot_synthesizer.h/cpp     # Snapshot generator
+        market_update.h          # Market update messages
+ trading/                         # Trading client components
+    strategy/                    # Trading algorithms
+       trade_engine.h/cpp       # Main trading engine
+       market_maker.h/cpp       # Market making strategy
+       liquidity_taker.h/cpp    # Liquidity taking strategy
+       feature_engine.h         # Feature calculation
+       order_manager.h/cpp      # Order management
+       risk_manager.h/cpp       # Pre-trade risk checks
+       position_keeper.h        # Position tracking
+    order_gw/                    # Order gateway client
+       order_gateway.h/cpp      # TCP order client
+    market_data/                 # Market data consumer
+        market_data_consumer.h/cpp     # Multicast consumer
+ benchmarks/                      # Performance benchmarks
+    logger_benchmark.cpp         # Logging performance
+    hash_benchmark.cpp           # Hash map performance
+    release_benchmark.cpp        # Overall system benchmark
+ notebooks/                       # Performance analysis
+    perf_analysis.ipynb          # Jupyter notebook analysis
+ scripts/                         # Build and run scripts
+     build.sh                     # Build release and debug
+     run_exchange_and_clients.sh  # Run complete system
+     run_benchmarks.sh            # Run performance tests
 ```
 
 ## Key Features
@@ -106,9 +106,9 @@ cpp_simple_example/
 **Data Structure:**
 ```cpp
 Price Levels (Doubly Linked List)
-    ↓
+    
 MEOrdersAtPrice (per price level)
-    ↓
+    
 MEOrder (Doubly Linked List of orders at same price)
 ```
 
@@ -129,13 +129,13 @@ MEOrder (Doubly Linked List of orders at same price)
 ### Communication Protocols
 
 **TCP (Order Flow)**
-- Client → Exchange: NewOrder, CancelOrder
-- Exchange → Client: ExecutionReport (Accepted, Filled, Rejected, Canceled)
+- Client  Exchange: NewOrder, CancelOrder
+- Exchange  Client: ExecutionReport (Accepted, Filled, Rejected, Canceled)
 - Binary protocol with packed structures
 - Non-blocking sockets with busy polling
 
 **Multicast (Market Data)**
-- Exchange → All Clients: Market updates
+- Exchange  All Clients: Market updates
 - UDP multicast for one-to-many distribution
 - Incremental updates and periodic snapshots
 - Sequence numbers for gap detection
@@ -255,13 +255,13 @@ void deallocate(const T* elem);         // Return to pool
 
 **Architecture:**
 ```
-ClientRequest (TCP) → Order Server → [LFQueue] → Matching Engine
-                                                       ↓
+ClientRequest (TCP)  Order Server  [LFQueue]  Matching Engine
+                                                       
                                               Order Book Processing
-                                                       ↓
-                         ┌────────────────────────────┴────────────────────────┐
-                         ↓                                                      ↓
-                  [LFQueue] → Order Server → ClientResponse (TCP)    [LFQueue] → Market Data Publisher
+                                                       
+                         
+                                                                               
+                  [LFQueue]  Order Server  ClientResponse (TCP)    [LFQueue]  Market Data Publisher
 ```
 
 **Main Loop:**
@@ -359,7 +359,7 @@ logger.log("%:% %() % message: % value: %\n",
 
 **End-to-End Latency:**
 - TCP round trip: ~10-50 microseconds (localhost)
-- Order → Match → Response: ~1-5 microseconds
+- Order  Match  Response: ~1-5 microseconds
 - Market data propagation: ~5-20 microseconds
 
 **Throughput:**
