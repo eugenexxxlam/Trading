@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 #include "common/macros.h"
 #include "common/logging.h"
 

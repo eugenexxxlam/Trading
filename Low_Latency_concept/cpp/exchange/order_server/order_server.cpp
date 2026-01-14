@@ -93,7 +93,7 @@ namespace Exchange {
    * - TCP server destructor closes all sockets
    * - Automatic cleanup (RAII)
    */
-  ~OrderServer() {
+  OrderServer::~OrderServer() {
     stop();  // Set run_ = false (stop main loop)
 
     // Wait for thread to exit and resources to clean up

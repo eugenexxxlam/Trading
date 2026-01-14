@@ -79,7 +79,7 @@ namespace Exchange {
    * - Order book destructor cleans up internal resources
    * - Memory pools automatically cleaned up
    */
-  ~MatchingEngine() {
+  MatchingEngine::~MatchingEngine() {
     stop();  // Set run_ = false (stop main loop)
 
     // Wait for thread to exit and queues to drain

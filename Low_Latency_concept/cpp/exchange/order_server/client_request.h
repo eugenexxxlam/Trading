@@ -212,22 +212,20 @@ namespace Exchange {
    * - Packed (no padding between fields)
    * 
    * CLIENT-SIDE:
-   * ```cpp
+   * Example:
    * OMClientRequest request;
    * request.seq_num_ = next_seq++;  // Increment sequence
-   * request.me_client_request_ = /* fill order details */;
+   * request.me_client_request_ = ...; // fill order details
    * send(socket, &request, sizeof(request), 0);  // TCP send
-   * ```
    * 
    * SERVER-SIDE:
-   * ```cpp
+   * Example:
    * OMClientRequest request;
    * recv(socket, &request, sizeof(request), 0);  // TCP receive
    * if (request.seq_num_ != expected_seq) {
    *   // Gap detected or duplicate
    * }
    * // Forward me_client_request_ to matching engine
-   * ```
    */
   struct OMClientRequest {
     size_t seq_num_ = 0;                      // Sequence number (monotonic)
