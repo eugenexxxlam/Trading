@@ -71,7 +71,7 @@ namespace Exchange {
    * - Memory pools auto-cleanup (RAII)
    * - No manual deallocation needed
    */
-  ~MEOrderBook() {
+  MEOrderBook::~MEOrderBook() {
     // Log final order book state (for debugging, audit)
     logger_->log("%:% %() % OrderBook\n%\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str_),
                 toString(false, true));

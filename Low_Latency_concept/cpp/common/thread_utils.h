@@ -163,7 +163,7 @@ namespace Common {
  * 
  * 3. INTERRUPT STEERING:
  *    - Move IRQs away from trading cores
- *    - /proc/irq/*/smp_affinity
+ *    - /proc/irq/N/smp_affinity (where N is IRQ number)
  *    - Keep cores 0-7 for trading, 8+ for interrupts
  * 
  * 4. MONITORING:

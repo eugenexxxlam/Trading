@@ -82,7 +82,7 @@ namespace Exchange {
    * - Thread exits naturally
    * - Memory pool auto-cleanup (RAII)
    */
-  ~SnapshotSynthesizer() {
+  SnapshotSynthesizer::~SnapshotSynthesizer() {
     stop();  // Stop thread
   }
 
