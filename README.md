@@ -1,449 +1,464 @@
-# Algorithmic Trading Infrastructure
+# Quantitative Trading Research & Infrastructure
 
-**Production-Grade Trading Systems | Institutional Execution Infrastructure | AI-Driven Market Making**
+**Institutional-Grade Electronic Trading Systems and Quantitative Strategy Research**
 
-Comprehensive trading technology stack encompassing exchange connectivity, institutional execution protocols, ultra-low-latency market infrastructure, and autonomous intelligent trading systems. Built for institutional-grade performance, reliability, and scalability.
-
----
-
-## Quick Start Guide
-
-**"How do I use this code?"**
-
-| Component | What You Need | Quick Setup |
-|-----------|--------------|-------------|
-| **Crypto Exchange** | Exchange API Key (Binance, etc.) | Configure credentials → Run Python scripts |
-| **FIX Protocol** | FIX API account from broker | Configure FIX settings → Compile & run C++/Java client |
-| **Low-Latency Engine** | C++20 compiler | Run `./scripts/build.sh` → Start exchange locally |
-| **RL Trading Agent** | Linux AWS EC2 with GPU | Install Ray/TensorFlow → Run training script |
-| **MT4 Strategies** | MetaTrader 4 platform | Copy `.mq4` to Experts folder → Compile & backtest |
-
-**Detailed prerequisites in [Getting Started](#getting-started---prerequisites) section below.**
+This repository contains research and implementation of institutional trading infrastructure spanning electronic market connectivity, execution protocols, ultra-low-latency market microstructure, and machine learning-driven systematic strategies. The codebase represents rigorous quantitative research applied to practical trading system engineering.
 
 ---
 
-## System Architecture Overview
+## Research Overview
 
-This repository contains a complete end-to-end trading technology ecosystem, from electronic market connectivity through institutional execution infrastructure to sell-side exchange systems and adaptive AI trading agents. Each component represents production-ready implementations of critical trading infrastructure used in modern quantitative trading operations.
+This repository encompasses six interconnected research domains in quantitative trading and market microstructure:
 
----
+1. **Electronic Market Connectivity** - Research and implementation of authenticated API integration, WebSocket streaming protocols, and high-throughput order execution systems
+2. **Institutional Execution Protocols** - Multi-language FIX protocol implementation for institutional order routing and execution management
+3. **Ultra-Low-Latency Market Microstructure** - Research in sub-microsecond matching engines, lock-free concurrency, and sell-side exchange architecture
+4. **Multi-Timeframe Signal Generation** - Quantitative analysis framework implementing 184-dimensional technical feature extraction across eight timeframes
+5. **Deep Reinforcement Learning for Trading** - Research in model-free policy optimization for autonomous trading strategy discovery
+6. **Systematic Strategy Validation** - Rigorous backtesting methodology with statistical validation and performance attribution analysis
 
-## 1. Electronic Market Connectivity Layer
-
-**Cryptocurrency Exchange Integration & Order Execution Infrastructure**
-
-> **Prerequisites:** Exchange API credentials required (API Key + Secret Key from Binance, GAIA Exchange, or similar)
-
-Production-ready connectivity infrastructure for digital asset exchanges, implementing authenticated REST APIs, real-time WebSocket data feeds, and order lifecycle management. System handles high-throughput trading operations with comprehensive position and risk management.
-
-**Core Capabilities:**
-- **Full Trading Lifecycle Management:** Market orders, limit orders, position management, automated liquidation
-- **Real-Time Market Data:** WebSocket streaming for tick-by-tick price updates, order book depth, and trade flow
-- **Authentication & Security:** HMAC SHA256 signature-based authentication with request signing and timestamp validation
-- **Account & Risk Management:** Real-time balance monitoring, position tracking, margin calculations
-- **Automated Execution:** Bulk order execution, algorithmic trading strategies, randomized volume algorithms
-- **High-Throughput Operations:** Multi-threaded execution, connection pooling, rate limit management
-
-**Technical Implementation:**
-- GAIA Exchange API integration (spot & futures markets)
-- HMAC-authenticated REST endpoints with microsecond timestamp precision
-- WebSocket protocol with Gzip compression and automatic reconnection
-- Thread-safe order execution with logging and audit trails
-- Symbol precision handling and order parameter validation
-
-**Tech Stack:** Python, REST APIs, WebSocket Protocol, HMAC Authentication, Multi-Threading, Logging
-
-[`Crypto_Exchange/`](Crypto_Exchange/) | [**Detailed Documentation →**](Crypto_Exchange/README.md)
+Each research component addresses fundamental questions in quantitative trading system design, market microstructure, and computational finance. System requirements and implementation details are provided in the [Prerequisites](#system-prerequisites) and [Build & Deployment](#build--deployment) sections.
 
 ---
 
-## 2. Institutional Execution Protocol Layer
+## System Architecture
+
+This repository implements a complete end-to-end trading research infrastructure, encompassing both buy-side and sell-side perspectives. The architecture spans from electronic market connectivity through institutional execution protocols to exchange infrastructure and adaptive algorithmic trading agents. Each component represents research-grade implementations suitable for institutional quantitative trading operations.
+
+---
+
+## 1. Electronic Market Connectivity Research
+
+**Cryptocurrency Exchange Integration and Order Execution Infrastructure**
+
+Research implementation of connectivity infrastructure for digital asset exchanges, including authenticated REST APIs, real-time WebSocket data feeds, and complete order lifecycle management. The system demonstrates high-throughput trading operations with comprehensive position and risk management capabilities.
+
+### Research Contributions
+
+- **Order Lifecycle Management** - Implementation of market orders, limit orders, position management, and automated liquidation logic
+- **Real-Time Market Data Processing** - WebSocket streaming infrastructure for tick-by-tick price updates, order book depth aggregation, and trade flow analysis
+- **Authentication and Security** - HMAC SHA256 signature-based authentication with request signing and timestamp validation protocols
+- **Account and Risk Management** - Real-time balance monitoring, position tracking, and margin calculation systems
+- **Algorithmic Execution** - Bulk order execution, randomized volume algorithms, and execution cost analysis
+- **High-Throughput Architecture** - Multi-threaded execution framework with connection pooling and rate limit management
+
+### Technical Implementation
+
+The system integrates with multiple exchange APIs (GAIA Exchange, Binance) implementing HMAC-authenticated REST endpoints with microsecond timestamp precision. WebSocket protocol implementation includes Gzip compression and automatic reconnection logic. Thread-safe order execution with comprehensive logging and audit trails ensures research reproducibility. Symbol precision handling and order parameter validation prevents execution errors.
+
+**Implementation Languages:** Python  
+**Protocols:** REST APIs, WebSocket, HMAC Authentication  
+**Concurrency Model:** Multi-Threading with logging subsystem
+
+[`Crypto_Exchange/`](Crypto_Exchange/) | [Detailed Documentation](Crypto_Exchange/README.md)
+
+**System Requirements:** Exchange API credentials (API Key and Secret Key from supported exchanges)
+
+---
+
+## 2. Institutional Execution Protocol Research
 
 **FIX Protocol Implementation for Institutional Connectivity**
 
-> **Prerequisites:** FIX API account from institutional broker (requires API credentials and FIX session configuration)
+Multi-language implementation of the Financial Information eXchange (FIX) protocol, the global standard for institutional trading connectivity. This research demonstrates complete order routing infrastructure suitable for prime brokerages, dark pools, and institutional execution venues.
 
-Multi-language implementation of the Financial Information eXchange (FIX) protocol—the global standard for institutional trading connectivity. Provides complete order routing infrastructure for prime brokerages, dark pools, and institutional execution venues.
+### System Components
 
-**System Components:**
+**C++ Implementation:**
+- Order matching engine with price-time priority algorithm and complete execution reporting (FIX 4.2/4.4 compliance)
+- Execution simulator with configurable fill logic and latency modeling for backtesting
+- Trade client implementing order submission, modification, and cancellation with FIX session management
 
-### C++ Implementation
-- **Order Matching Engine:** Price-time priority matching algorithm with full execution reporting (FIX 4.2/4.4)
-- **Execution Simulator:** Simulated venue with configurable fill logic and latency modeling
-- **Trade Client:** Order submission, modification, and cancellation with FIX session management
+**Java Implementation:**
+- Banzai trading interface providing institutional-grade order entry GUI
+- Real-time order status tracking and execution reporting system
+- FIX market data subscription and processing infrastructure
 
-### Java Implementation
-- **Banzai Trading GUI:** Professional trading interface with Swing-based UI for order entry and execution monitoring
-- **Order Management:** Real-time order status tracking and execution reporting
-- **Market Data Integration:** FIX market data subscription and processing
+**Python Implementation:**
+- Lightweight execution simulator optimized for backtesting and simulation research
 
-### Python Implementation
-- **Lightweight Executor:** High-performance execution simulator for backtesting and simulation
+### FIX Message Flow
 
-**FIX Message Flow:**
-- Session-level: Logon, Heartbeat, TestRequest, Logout
-- Application-level: NewOrderSingle (D), ExecutionReport (8), OrderCancelRequest (F), OrderCancelReplaceRequest (G)
-- Market Data: MarketDataRequest (V), MarketDataSnapshot (W)
+**Session-Level Messages:**  
+Logon, Heartbeat, TestRequest, Logout
 
-**Tech Stack:** QuickFIX Engine, C++, Java, Python, FIX Protocol 4.2/4.4, TCP Sockets, Multi-Threading
+**Application-Level Messages:**  
+NewOrderSingle (D), ExecutionReport (8), OrderCancelRequest (F), OrderCancelReplaceRequest (G)
 
-[`FIX_protocol_quickfix/`](FIX_protocol_quickfix/) | [**Detailed Documentation →**](FIX_protocol_quickfix/README.md)
+**Market Data Messages:**  
+MarketDataRequest (V), MarketDataSnapshot (W)
 
----
+**Implementation Technologies:** QuickFIX Engine, C++, Java, Python  
+**Protocol Version:** FIX 4.2/4.4  
+**Network Layer:** TCP Sockets with Multi-Threading
 
-## 3. Ultra-Low-Latency Exchange Infrastructure
+[`FIX_protocol_quickfix/`](FIX_protocol_quickfix/) | [Detailed Documentation](FIX_protocol_quickfix/README.md)
 
-**Sell-Side Matching Engine & Market Making Infrastructure**
-
-> **Prerequisites:** C++20 compiler (GCC 10+/Clang 12+), CMake 3.5+, Ninja build system — **No external API required** (runs locally)
-
-Complete exchange infrastructure built in C++20, optimized for sub-microsecond order book operations. Implements both sell-side (exchange) and buy-side (trading) components with institutional-grade performance characteristics suitable for high-frequency trading operations.
-
-**Sell-Side Architecture (Exchange Infrastructure):**
-
-### Matching Engine
-- **Order Book:** Price-time priority matching with lock-free data structures
-- **Order Types:** Market, Limit, IOC, FOK with full execution logic
-- **Performance:** Sub-microsecond order processing latency
-- **Capacity:** Multi-ticker support with independent order books per symbol
-- **Message Flow:** Client requests → FIFO sequencer → Matching engine → Client responses + Market data
-
-### Order Gateway Server
-- **Protocol:** TCP order entry with session management
-- **Sequencing:** FIFO sequencer for fair order processing
-- **Throughput:** Lock-free queue architecture for zero-contention message passing
-
-### Market Data Publisher
-- **Protocol:** Multicast UDP for low-latency dissemination
-- **Data Types:** Snapshot (full order book depth) + Incremental updates (BBO, trades, order events)
-- **Latency:** Microsecond-level market data publishing
-
-**Buy-Side Architecture (Trading Infrastructure):**
-
-### Trade Engine
-- **Strategy Framework:** Pluggable algorithm interface supporting multiple strategies
-- **Algorithms Implemented:**
-  - **Market Maker:** Passive two-sided quoting with fair value calculation and inventory management
-  - **Liquidity Taker:** Aggressive directional trading based on signal triggers
-  - **Random Trader:** Simulation and testing algorithm
-- **Components:** Feature engine, position keeper, order manager, risk manager
-
-### Order Gateway Client
-- **Low-Latency Submission:** Direct TCP connection to exchange
-- **Order Management:** In-flight order tracking, acknowledgment handling
-
-### Market Data Consumer
-- **Multicast Reception:** Real-time order book reconstruction from incremental updates
-- **Book Building:** Efficient BBO calculation and depth aggregation
-
-**Performance Engineering:**
-
-1. **Lock-Free Concurrency:**
-   - Lock-free queues (`LFQueue`) for zero-contention inter-thread communication
-   - Atomic operations for thread-safe state management
-   - Wait-free data structures in critical paths
-
-2. **Memory Management:**
-   - Custom memory pools (`MemPool`) with placement new
-   - Zero allocation in order execution paths
-   - Cache-line aligned data structures
-
-3. **Low-Latency Networking:**
-   - TCP sockets with Nagle disabled (TCP_NODELAY)
-   - Multicast UDP for market data fan-out
-   - Non-blocking I/O with epoll-based event loops
-
-4. **Instrumentation:**
-   - Custom async logger with microsecond timestamps
-   - Lock-free logging queue to avoid I/O in critical paths
-   - Performance benchmarking suite
-
-**Tech Stack:** C++20, Lock-Free Data Structures, TCP/UDP Sockets, Multicast, Memory Pools, CMake, Ninja
-
-[`Low_Latency_concept/cpp/`](Low_Latency_concept/cpp/) | [**Detailed Documentation →**](Low_Latency_concept/cpp/README.md)
+**System Requirements:** FIX API account with institutional broker (requires API credentials and FIX session configuration)
 
 ---
 
-## 4. Multi-Timeframe Signal Generation Engine
+## 3. Ultra-Low-Latency Market Microstructure Research
 
-**Quantitative Technical Analysis & Feature Engineering**
+**Sell-Side Matching Engine and Market Making Infrastructure**
 
-> **Prerequisites:** MetaTrader 4 platform — Download `.mq4` file to MT4 `Experts` folder and compile in MetaEditor
+Research implementation of exchange infrastructure in C++20, optimized for sub-microsecond order book operations. The system implements both sell-side (exchange) and buy-side (trading) components with performance characteristics suitable for high-frequency trading research.
 
-Enterprise-grade signal generation infrastructure implementing 23 technical indicators across 8 timeframes, producing a 184-dimensional feature space for systematic trading strategies and machine learning models. Real-time calculation engine with probabilistic scoring framework.
+### Sell-Side Architecture (Exchange Infrastructure)
 
-**Indicator Suite:**
+**Matching Engine:**
+- Order book with price-time priority matching and lock-free data structures
+- Order type support: Market, Limit, IOC (Immediate-or-Cancel), FOK (Fill-or-Kill)
+- Performance target: Sub-microsecond order processing latency
+- Multi-ticker capacity with independent order books per instrument
+- Message flow: Client requests → FIFO sequencer → Matching engine → Client responses with market data dissemination
 
-### Ichimoku Kinko Hyo (Complete System)
-- **Tenkan-sen** (Conversion Line): 9-period midpoint
-- **Kijun-sen** (Base Line): 26-period midpoint
-- **Senkou Span A** (Leading Span A): (Tenkan + Kijun)/2 shifted +26
-- **Senkou Span B** (Leading Span B): 52-period midpoint shifted +26
-- **Chikou Span** (Lagging Span): Close price shifted -26
-- **Cloud (Kumo):** Area between Span A and Span B
-- **Signal Logic:** Tenkan/Kijun crosses, price/cloud relationships, Chikou confirmation
+**Order Gateway Server:**
+- TCP order entry protocol with session management
+- FIFO sequencer ensuring fair order processing
+- Lock-free queue architecture for zero-contention message passing
 
-### Momentum & Trend Indicators
-- **MACD** (Moving Average Convergence Divergence): 12/26/9 configuration
-- **RSI** (Relative Strength Index): 14-period momentum oscillator
-- **ADX** (Average Directional Index): Trend strength measurement
-- **Parabolic SAR** (Stop and Reverse): Dynamic support/resistance
-- **Awesome Oscillator (AO):** 5/34 simple moving average histogram
-- **Accelerator Oscillator (AC):** AO momentum derivative
-- **Aroon Indicator:** Up/Down trend identification
-- **Williams %R:** Momentum in overbought/oversold zones
+**Market Data Publisher:**
+- Multicast UDP protocol for low-latency market data dissemination
+- Data types: Full snapshot (complete order book depth) and incremental updates (BBO, trades, order events)
+- Target latency: Microsecond-level market data publishing
 
-### Volatility & Risk Metrics
-- **ATR** (Average True Range): 14-period volatility measurement
-- **Bollinger Bands Stop:** Dynamic stop-loss levels
-- **ATR% Regime Filter:** Asymmetric volatility classification
+### Buy-Side Architecture (Trading Infrastructure)
+
+**Trade Engine:**
+- Pluggable algorithm interface supporting multiple trading strategies
+- Implemented algorithms:
+  - Market Maker: Passive two-sided quoting with fair value calculation and inventory management
+  - Liquidity Taker: Aggressive directional trading based on signal triggers
+  - Random Trader: Simulation and testing algorithm
+- System components: Feature engine, position keeper, order manager, risk manager
+
+**Order Gateway Client:**
+- Low-latency TCP connection to exchange
+- In-flight order tracking with acknowledgment handling
+
+**Market Data Consumer:**
+- Real-time multicast reception and order book reconstruction from incremental updates
+- Efficient BBO calculation and depth aggregation
+
+### Performance Engineering Research
+
+**1. Lock-Free Concurrency:**
+- Lock-free queues (LFQueue) for zero-contention inter-thread communication
+- Atomic operations for thread-safe state management
+- Wait-free data structures in critical execution paths
+
+**2. Memory Management:**
+- Custom memory pools (MemPool) with placement new allocation
+- Zero heap allocation in order execution critical paths
+- Cache-line aligned data structures to prevent false sharing
+
+**3. Low-Latency Networking:**
+- TCP sockets with Nagle algorithm disabled (TCP_NODELAY)
+- Multicast UDP for efficient market data fan-out
+- Non-blocking I/O with epoll-based event loops
+
+**4. Instrumentation:**
+- Custom asynchronous logger with microsecond timestamp precision
+- Lock-free logging queue to eliminate I/O latency in critical paths
+- Performance benchmarking suite for latency measurement
+
+**Implementation Language:** C++20  
+**Concurrency Primitives:** Lock-Free Data Structures, Atomic Operations  
+**Network Protocols:** TCP, UDP Multicast  
+**Build System:** CMake, Ninja
+
+[`Low_Latency_concept/cpp/`](Low_Latency_concept/cpp/) | [Detailed Documentation](Low_Latency_concept/cpp/README.md)
+
+**System Requirements:** C++20 compiler (GCC 10+ or Clang 12+), CMake 3.5+, Ninja build system (no external API required - runs locally)
+
+---
+
+## 4. Multi-Timeframe Technical Analysis Research
+
+**Quantitative Signal Generation and Feature Engineering**
+
+Research implementation of enterprise-grade signal generation infrastructure implementing 23 technical indicators across 8 timeframes, producing a 184-dimensional feature space for systematic trading strategies and machine learning models. The system provides real-time calculation with probabilistic scoring framework.
+
+### Indicator Suite
+
+**Ichimoku Kinko Hyo (Complete System):**
+- Tenkan-sen (Conversion Line): 9-period midpoint calculation
+- Kijun-sen (Base Line): 26-period midpoint calculation
+- Senkou Span A (Leading Span A): Average of Tenkan and Kijun shifted +26 periods
+- Senkou Span B (Leading Span B): 52-period midpoint shifted +26 periods
+- Chikou Span (Lagging Span): Close price shifted -26 periods
+- Cloud (Kumo): Dynamic support/resistance zone between Span A and Span B
+- Signal logic: Tenkan/Kijun crossovers, price/cloud relationships, Chikou confirmation
+
+**Momentum and Trend Indicators:**
+- MACD (Moving Average Convergence Divergence): 12/26/9 standard configuration
+- RSI (Relative Strength Index): 14-period momentum oscillator
+- ADX (Average Directional Index): Trend strength measurement
+- Parabolic SAR (Stop and Reverse): Dynamic support and resistance levels
+- Awesome Oscillator (AO): 5/34 simple moving average histogram
+- Accelerator Oscillator (AC): Momentum derivative of AO
+- Aroon Indicator: Up/Down trend identification system
+- Williams %R: Momentum measurement in overbought/oversold zones
+
+**Volatility and Risk Metrics:**
+- ATR (Average True Range): 14-period volatility measurement
+- Bollinger Bands Stop: Dynamic stop-loss level calculation
+- ATR% Regime Filter: Asymmetric volatility classification for regime detection
 
 ### Multi-Timeframe Architecture
-- **Timeframes:** M1, M5, M15, M30, H1, H4, D1, W1
-- **Total Signals:** 184 dimensions (23 indicators × 8 timeframes)
-- **Update Frequency:** Real-time on each tick with smart caching
+
+- **Timeframes Analyzed:** M1, M5, M15, M30, H1, H4, D1, W1
+- **Total Signal Dimensions:** 184 (23 indicators × 8 timeframes)
+- **Update Frequency:** Real-time on each tick with intelligent caching
 - **Synchronization:** Cross-timeframe confirmation logic
 
-**Probabilistic Scoring Framework:**
-- **Weighted Aggregation:** Custom weighting by indicator reliability and timeframe
-- **Sigmoid Transformation:** 0-100 probability score with tunable parameters
-- **Signal Fusion:** Bayesian-inspired combination of multiple indicators
-- **Regime Detection:** ATR-based market state classification (trending, ranging, volatile)
+### Probabilistic Scoring Framework
 
-**Alert System:**
-- **Multi-Tier Confirmation:** M15 primary, H1 confirmation, H4 trend filter
-- **Confluence Scoring:** Higher timeframe agreement requirements
-- **Notification Engine:** Real-time alerts with customizable thresholds
+Research implementation of weighted aggregation with custom weighting by indicator reliability and timeframe significance. Sigmoid transformation produces 0-100 probability scores with tunable parameters. Signal fusion implements Bayesian-inspired combination of multiple indicators. Regime detection uses ATR-based market state classification (trending, ranging, volatile).
 
-**Application:**
-- **Feature Engineering:** 184-dimensional observation space for reinforcement learning agents
-- **Systematic Strategies:** Rule-based trading with multi-indicator confirmation
-- **Risk Management:** Volatility-adjusted position sizing and stop placement
+### Alert System
 
-**Tech Stack:** MQL4, MetaTrader 4, Technical Analysis Library, Real-Time Signal Processing
+Multi-tier confirmation system requiring M15 primary signals with H1 confirmation and H4 trend filter. Confluence scoring mechanism for higher timeframe agreement requirements. Real-time notification engine with customizable thresholds.
 
-[`Trading_Signals_Dashboard/`](Trading_Signals_Dashboard/) | [**Detailed Documentation →**](Trading_Signals_Dashboard/README.md)
+### Research Applications
+
+- Feature engineering: 184-dimensional observation space for reinforcement learning agents
+- Systematic strategies: Rule-based trading with multi-indicator confirmation
+- Risk management: Volatility-adjusted position sizing and stop placement algorithms
+
+**Implementation Language:** MQL4  
+**Platform:** MetaTrader 4  
+**Processing:** Real-Time Signal Processing
+
+[`Trading_Signals_Dashboard/`](Trading_Signals_Dashboard/) | [Detailed Documentation](Trading_Signals_Dashboard/README.md)
+
+**System Requirements:** MetaTrader 4 platform (download `.mq4` file to MT4 `Experts` folder and compile in MetaEditor)
 
 ---
 
-## 5. Autonomous Trading via Deep Reinforcement Learning
+## 5. Deep Reinforcement Learning for Systematic Trading
 
-**Adaptive AI Agents for Systematic Alpha Generation**
+**Adaptive AI Agents for Autonomous Alpha Generation**
 
-> **Prerequisites:** Linux environment with NVIDIA GPU (AWS EC2 recommended: p3.2xlarge or g4dn.xlarge) — Check with `nvidia-smi`
+Advanced machine learning research implementing deep reinforcement learning for autonomous trading strategy discovery. The system learns optimal execution policies from historical market data, adapting to regime changes and market microstructure without explicit rule coding.
 
-Advanced machine learning infrastructure implementing deep reinforcement learning for autonomous trading strategy discovery. System learns optimal execution policies from historical market data, adapting to regime changes and market microstructure without human-coded rules.
+### Reinforcement Learning Framework
 
-**Reinforcement Learning Framework:**
+**Markov Decision Process Formulation:**
 
-### Markov Decision Process Formulation
-- **State Space (Observation):**
-  - **Market Data:** Multi-timeframe OHLCV (1min, 5min, 15min, 1H, 4H, 1D)
-  - **Technical Indicators:** 184-dimensional feature vector from signal generation engine
-  - **Account State:** Equity, balance, unrealized P&L, margin usage, available leverage
-  - **Position Information:** NOP (Net Open Position), average entry price, position duration
-  - **Performance Metrics:** Cumulative returns, Sortino ratio, maximum drawdown, win rate
+**State Space (Observation):**
+- Market data: Multi-timeframe OHLCV (1min, 5min, 15min, 1H, 4H, 1D)
+- Technical indicators: 184-dimensional feature vector from signal generation system
+- Account state: Equity, balance, unrealized P&L, margin usage, available leverage
+- Position information: NOP (Net Open Position), average entry price, position duration
+- Performance metrics: Cumulative returns, Sortino ratio, maximum drawdown, win rate
 
-- **Action Space:** Discrete(201)
-  - Position sizing from -100% (max short) to +100% (max long)
-  - Granularity: 1% increments for precise position control
-  - Actions: [CLOSE_ALL, SHORT_100%, ..., FLAT, ..., LONG_100%]
+**Action Space:** Discrete(201)
+- Position sizing from -100% (maximum short) to +100% (maximum long)
+- Granularity: 1% increments for precise position control
+- Actions: [CLOSE_ALL, SHORT_100%, ..., FLAT, ..., LONG_100%]
 
-- **Reward Function:** Multi-component optimization
-  - **Dense Reward:** Tick-by-tick unrealized P&L changes
-  - **Sparse Reward:** Realized P&L on position close with Sortino ratio bonus
-  - **Shaping Reward:** Drawdown penalties, holding cost adjustments
-  - **Penalties:** Invalid actions, stop-out events, excessive trading costs
+**Reward Function:** Multi-component optimization
+- Dense reward: Tick-by-tick unrealized P&L changes
+- Sparse reward: Realized P&L on position close with Sortino ratio bonus
+- Shaping reward: Drawdown penalties, holding cost adjustments
+- Penalties: Invalid actions, stop-out events, excessive trading costs
 
 ### Deep Neural Network Architecture
 
 **IMPALA (Importance Weighted Actor-Learner Architecture):**
-- **Off-Policy Learning:** Decoupled acting and learning for high throughput
-- **V-trace Correction:** Importance sampling for policy lag correction
-- **Distributed Training:** Actor-learner separation for scalable training
+- Off-policy learning with decoupled acting and learning for high throughput
+- V-trace correction implementing importance sampling for policy lag correction
+- Distributed training with actor-learner separation for scalable training infrastructure
 
 **LSTM Policy Network:**
-- **Architecture:** 512 hidden units, 20 sequence length
-- **Input:** Time-series of observations (OHLCV + indicators + account state)
-- **Output:** Policy π(a|s) and Value function V(s)
-- **Recurrence:** Captures temporal dependencies and market regime persistence
+- Architecture: 512 hidden units, 20 sequence length
+- Input: Time-series of observations (OHLCV + technical indicators + account state)
+- Output: Policy π(a|s) and value function V(s)
+- Recurrence: Captures temporal dependencies and market regime persistence
 
 **Training Infrastructure:**
-- **Framework:** Ray RLlib (distributed RL platform)
-- **Workers:** 195 parallel rollout workers for experience collection
-- **Backend:** TensorFlow 2 with eager execution
-- **Compute:** GPU-accelerated training with distributed experience replay
-- **Hyperparameters:** Learning rate 2.76e-4, discount γ=0.94, entropy coefficient 0.01
+- Framework: Ray RLlib (distributed reinforcement learning platform)
+- Workers: 195 parallel rollout workers for experience collection
+- Backend: TensorFlow 2 with eager execution
+- Compute: GPU-accelerated training with distributed experience replay
+- Hyperparameters: Learning rate 2.76e-4, discount factor γ=0.94, entropy coefficient 0.01
 
-### Trading Simulator (Gym Environment)
+### Trading Simulator (Gymnasium Environment)
 
 **Margin Trading Mechanics:**
-- **Leverage:** Configurable (1x to 100x), dynamically adjusted based on risk
-- **Margin Calculation:** Initial margin, maintenance margin, margin calls
-- **Stop-Out Logic:** Automatic liquidation at maintenance margin breach
-- **Funding Rates:** Realistic cost modeling for leveraged positions
+- Leverage: Configurable (1x to 100x), dynamically adjusted based on risk metrics
+- Margin calculation: Initial margin, maintenance margin, margin call thresholds
+- Stop-out logic: Automatic liquidation at maintenance margin breach
+- Funding rates: Realistic cost modeling for leveraged positions
 
 **Position Management:**
-- **NOP Tracking:** Net Open Position with FIFO/LIFO accounting
-- **Average Price Calculation:** Weighted average entry price across multiple fills
-- **Position Sizing:** Kelly Criterion-inspired optimal leverage
-- **Trade Execution:** Market orders with realistic slippage modeling
+- NOP tracking: Net Open Position with FIFO/LIFO accounting methods
+- Average price calculation: Weighted average entry price across multiple fills
+- Position sizing: Kelly Criterion-inspired optimal leverage calculation
+- Trade execution: Market orders with realistic slippage modeling
 
 **Risk Management:**
-- **Maximum Drawdown Limits:** Episode termination on threshold breach
-- **Leverage Constraints:** Dynamic leverage reduction in high-volatility regimes
-- **Position Limits:** Maximum position size relative to account equity
-- **Stop-Loss:** ATR-based dynamic stops with trailing logic
+- Maximum drawdown limits with episode termination on threshold breach
+- Leverage constraints: Dynamic leverage reduction in high-volatility regimes
+- Position limits: Maximum position size relative to account equity
+- Stop-loss: ATR-based dynamic stops with trailing logic
 
 **Cost Modeling:**
-- **Trading Costs:** Bid-ask spread, exchange fees (maker/taker), slippage
-- **Holding Costs:** Funding rates for leveraged positions
-- **Market Impact:** Price impact modeling for large orders
+- Trading costs: Bid-ask spread, exchange fees (maker/taker), slippage
+- Holding costs: Funding rates for leveraged positions
+- Market impact: Price impact modeling for large orders
 
-### Backtesting & Validation
+### Backtesting and Validation
 
 **Historical Simulation:**
-- **Data:** High-frequency tick data (1-minute OHLCV)
-- **Timeframe:** Multi-year backtests across different market regimes
-- **Metrics:** Sharpe ratio, Sortino ratio, max drawdown, win rate, profit factor, Calmar ratio
+- Data source: High-frequency tick data (1-minute OHLCV)
+- Timeframe: Multi-year backtests across different market regimes
+- Performance metrics: Sharpe ratio, Sortino ratio, maximum drawdown, win rate, profit factor, Calmar ratio
 
 **Live Trading Interface:**
-- **LiveMarginTradingEnv:** Gym environment connected to live exchange via ccxt
-- **Real-Time Execution:** Direct order submission to Bybit exchange
-- **Account Sync:** Real-time balance, position, and P&L updates
-- **Safety Mechanisms:** Pre-trade risk checks, position limit enforcement
+- LiveMarginTradingEnv: Gymnasium environment connected to live exchange via ccxt library
+- Real-time execution: Direct order submission to exchange APIs
+- Account synchronization: Real-time balance, position, and P&L updates
+- Safety mechanisms: Pre-trade risk checks, position limit enforcement
 
-**Model Selection & Optimization:**
-- **Hyperparameter Tuning:** Ray Tune for automated optimization
-- **Cross-Validation:** Walk-forward analysis with expanding window
-- **Regime Testing:** Performance across bull, bear, and ranging markets
+**Model Selection and Optimization:**
+- Hyperparameter tuning: Ray Tune for automated optimization
+- Cross-validation: Walk-forward analysis with expanding window methodology
+- Regime testing: Performance evaluation across bull, bear, and ranging markets
 
-**Tech Stack:** Python, Ray RLlib, TensorFlow 2, OpenAI Gym, LSTM, IMPALA, Distributed Computing, ccxt, pybit
+**Implementation Stack:** Python, Ray RLlib, TensorFlow 2, OpenAI Gymnasium, LSTM Networks, IMPALA Algorithm  
+**Libraries:** ccxt, pybit, pandas_ta  
+**Compute:** Distributed GPU Training
 
-[`Reinforcement_Learning/`](Reinforcement_Learning/) | [**Detailed Documentation →**](Reinforcement_Learning/README.md)
+[`Reinforcement_Learning/`](Reinforcement_Learning/) | [Detailed Documentation](Reinforcement_Learning/README.md)
+
+**System Requirements:** Linux environment with NVIDIA GPU (AWS EC2 recommended: p3.2xlarge or g4dn.xlarge instance types) - verify with `nvidia-smi` command
 
 ---
 
-## 6. Systematic Strategy Backtesting & Validation
+## 6. Systematic Strategy Validation Research
 
 **Multi-Asset Algorithmic Trading Strategies with Statistical Validation**
 
-> **Prerequisites:** MetaTrader 4 platform with Strategy Tester — Copy `.mq4` Expert Advisors to MT4 and run backtests
+Comprehensive backtesting research framework implementing systematic multi-indicator strategies across multiple asset classes. Rigorous statistical validation using MetaTrader 4's tick-by-tick strategy tester with 99.9% modeling quality.
 
-Comprehensive backtesting framework implementing systematic multi-indicator strategies across multiple asset classes. Rigorous statistical validation using MetaTrader 4's tick-by-tick strategy tester with modeling quality of 99.9%.
+### Trading Strategies
 
-**Trading Strategies:**
-
-### ASB (Adaptive Scaling Basket) - Multi-Timeframe Confirmation Strategy
+**ASB (Adaptive Scaling Basket) - Multi-Timeframe Confirmation Strategy:**
 
 **Signal Generation:**
-- **Primary Signal:** M15 Tenkan/Cloud crossover with ATR range filter
-- **Confirmation:** M5, M15, H1, H4 multi-indicator confluence
-- **Indicators Used:** MACD (4 timeframes), AO (4 timeframes), AC (4 timeframes), Kijun-sen (2 timeframes)
-- **Trend Filter:** H1 Kijun-sen for directional bias
+- Primary signal: M15 Tenkan/Cloud crossover with ATR range filter
+- Confirmation: M5, M15, H1, H4 multi-indicator confluence requirements
+- Indicators utilized: MACD (4 timeframes), AO (4 timeframes), AC (4 timeframes), Kijun-sen (2 timeframes)
+- Trend filter: H1 Kijun-sen for directional bias determination
 
 **Execution Logic:**
-- **Entry:** Multi-indicator confirmation required (MACD, AO, AC, Kijun alignment)
-- **Position Sizing:** Progressive lot scaling with Kelly Criterion-inspired sizing
-- **Basket Management:** Multiple positions with staggered entries
-- **Exit:** Opposite signal or position switching on H1 Kijun reversal
+- Entry: Multi-indicator confirmation required (MACD, AO, AC, Kijun alignment)
+- Position sizing: Progressive lot scaling with Kelly Criterion-inspired methodology
+- Basket management: Multiple positions with staggered entry logic
+- Exit: Opposite signal generation or position switching on H1 Kijun reversal
 
 **Risk Management:**
-- **ATR-Based Filtering:** Exclude low-volatility periods (ATR < threshold)
-- **Trade Spacing:** Minimum pip distance between entries
-- **Position Switching:** Close all positions on trend reversal
-- **Maximum Exposure:** Basket size limits
+- ATR-based filtering: Exclusion of low-volatility periods (ATR < threshold)
+- Trade spacing: Minimum pip distance between consecutive entries
+- Position switching: Close all positions on trend reversal detection
+- Maximum exposure: Basket size limits
 
 **Performance Metrics (BTC/USDT 2025):**
-- **Total Net Profit:** +67,732.34 USD (67.7% return on 100k initial)
-- **Profit Factor:** 2.31 (gross profit / gross loss)
-- **Win Rate:** 74.14% (195 wins / 68 losses)
-- **Maximum Drawdown:** 45.85% (45,846.60 USD)
-- **Sharpe Ratio:** 1.87
-- **Total Trades:** 263 over 12 months
+- Total net profit: +67,732.34 USD (67.7% return on 100,000 USD initial capital)
+- Profit factor: 2.31 (gross profit / gross loss ratio)
+- Win rate: 74.14% (195 wins / 68 losses)
+- Maximum drawdown: 45.85% (45,846.60 USD)
+- Sharpe ratio: 1.87
+- Total trades: 263 over 12-month period
 
 **Multi-Asset Performance:**
-- **EURUSD 2023-2025:** Consistent profitability across trending and ranging regimes
-- **GBPUSD 2024-2025:** High Sharpe ratio in volatile periods
-- **USDJPY 2025:** Strong trending performance
-- **ETH/USDT 2025:** Cryptocurrency momentum capture
-- **WTI Crude Oil 2023-2025:** Commodity trend following
+- EURUSD 2023-2025: Consistent profitability across trending and ranging regimes
+- GBPUSD 2024-2025: High Sharpe ratio performance in volatile periods
+- USDJPY 2025: Strong trending market performance
+- ETH/USDT 2025: Cryptocurrency momentum capture
+- WTI Crude Oil 2023-2025: Commodity trend following performance
 
-### KSB (Kijun Senkou Based) - H4 Timeframe Strategy
+**KSB (Kijun Senkou Based) - H4 Timeframe Strategy:**
 
 **Signal Logic:**
-- **Primary:** H4 Kijun-sen and Senkou Span crossovers
-- **Confirmation:** Cloud thickness and Chikou Span positioning
-- **Trend Strength:** ADX filter for minimum trend quality
+- Primary signals: H4 Kijun-sen and Senkou Span crossovers
+- Confirmation: Cloud thickness analysis and Chikou Span positioning
+- Trend strength: ADX filter for minimum trend quality threshold
 
 **Backtest Results (2010-2020):**
-- **CADJPY:** Stable returns across decade-long period
-- **GBPAUD 2010-2015:** Strong performance in commodity currency pairs
-- **GBPCAD 2010-2020:** Consistent profitability
-- **GBPCHF 2010-2018:** Risk-adjusted returns with low drawdown
+- CADJPY: Stable returns across decade-long testing period
+- GBPAUD 2010-2015: Strong performance in commodity currency pairs
+- GBPCAD 2010-2020: Consistent profitability with low correlation to market regimes
+- GBPCHF 2010-2018: Risk-adjusted returns with controlled drawdown
 
-**Backtesting Infrastructure:**
+### Backtesting Infrastructure
 
 **Tick Data Quality:**
-- **Modeling Quality:** 99.9% (every tick based on real ticks)
-- **Spread:** Variable spread modeling with historical data
-- **Slippage:** Realistic slippage simulation
-- **Commission:** Exchange fee modeling (maker/taker)
+- Modeling quality: 99.9% (every tick based on real tick data)
+- Spread modeling: Variable spread with historical data
+- Slippage simulation: Realistic slippage implementation
+- Commission modeling: Exchange fee structure (maker/taker rates)
 
 **Statistical Validation:**
-- **Out-of-Sample Testing:** Walk-forward validation with rolling windows
-- **Monte Carlo Simulation:** 10,000 random trade sequence permutations
-- **Robustness Tests:** Parameter sensitivity analysis
-- **Regime Analysis:** Performance across bull/bear/sideways markets
+- Out-of-sample testing: Walk-forward validation with rolling windows
+- Monte Carlo simulation: 10,000 random trade sequence permutations
+- Robustness tests: Parameter sensitivity analysis
+- Regime analysis: Performance attribution across bull/bear/sideways markets
 
-**Performance Metrics:**
+**Performance Metrics Calculated:**
 - Profit factor, Sharpe ratio, Sortino ratio, Calmar ratio
 - Maximum drawdown, average drawdown, recovery factor
-- Win rate, average win/loss, profit per trade
-- Consecutive wins/losses, longest DD duration
-- Monthly/yearly returns with distribution analysis
+- Win rate, average win/loss ratio, profit per trade
+- Consecutive wins/losses, longest drawdown duration
+- Monthly and yearly returns with distribution analysis
 
-**Risk-Adjusted Returns:**
-- **Sharpe Ratio:** Average 1.5-2.0 across strategies
-- **Sortino Ratio:** Downside deviation < 15% annualized
-- **Maximum Drawdown:** Controlled within 30-50% range
-- **Recovery Factor:** Net profit / Max DD > 2.0
+**Risk-Adjusted Performance:**
+- Sharpe ratio: Average 1.5-2.0 across strategy implementations
+- Sortino ratio: Downside deviation < 15% annualized
+- Maximum drawdown: Controlled within 30-50% range
+- Recovery factor: Net profit / Maximum drawdown > 2.0
 
-**Tech Stack:** MQL4, MetaTrader 4 Strategy Tester, Statistical Analysis, Monte Carlo Simulation
+**Implementation Technologies:** MQL4, MetaTrader 4 Strategy Tester  
+**Statistical Methods:** Monte Carlo Simulation, Walk-Forward Analysis
 
-[`Trading_Strategy/`](Trading_Strategy/) | [**Detailed Documentation →**](Trading_Strategy/README.md)
+[`Trading_Strategy/`](Trading_Strategy/) | [Detailed Documentation](Trading_Strategy/README.md)
+
+**System Requirements:** MetaTrader 4 platform with Strategy Tester (copy `.mq4` Expert Advisors to MT4 `Experts` folder and execute backtests)
 
 ---
 
 ## Integrated Technology Stack
 
-| **Layer** | **Technologies** | **Functionality** |
-|-----------|-----------------|-------------------|
-| **Market Access** | Python, REST APIs, WebSocket, HMAC Auth | Electronic exchange connectivity, real-time data feeds |
-| **Institutional Protocols** | QuickFIX, FIX 4.2/4.4, C++, Java, Python | Prime broker connectivity, institutional execution |
-| **Low-Latency Infrastructure** | C++20, Lock-Free Queues, Memory Pools, TCP/Multicast | Sub-microsecond matching engine, market making infrastructure |
-| **Feature Engineering** | MQL4, Technical Analysis, Signal Processing | 184-dimensional observation space, regime detection |
-| **Machine Learning** | Ray RLlib, TensorFlow 2, LSTM, IMPALA, Gym | Deep reinforcement learning, adaptive strategy discovery |
-| **Validation** | MT4 Strategy Tester, Statistical Analysis, Monte Carlo | Rigorous backtesting, risk-adjusted performance measurement |
+|| **Research Layer** | **Technologies** | **Functionality** |
+||-------------------|-----------------|-------------------|
+|| **Market Access** | Python, REST APIs, WebSocket, HMAC Authentication | Electronic exchange connectivity, real-time data processing |
+|| **Institutional Protocols** | QuickFIX, FIX 4.2/4.4, C++, Java, Python | Prime broker connectivity, institutional execution infrastructure |
+|| **Low-Latency Infrastructure** | C++20, Lock-Free Queues, Memory Pools, TCP/Multicast UDP | Sub-microsecond matching engine, market making research |
+|| **Feature Engineering** | MQL4, Technical Analysis, Signal Processing | 184-dimensional observation space, regime detection algorithms |
+|| **Machine Learning** | Ray RLlib, TensorFlow 2, LSTM, IMPALA, Gymnasium | Deep reinforcement learning, adaptive strategy discovery |
+|| **Validation** | MT4 Strategy Tester, Statistical Analysis, Monte Carlo | Rigorous backtesting, risk-adjusted performance measurement |
 
 ---
 
 ## Technical Specifications
 
 **Performance Characteristics:**
-- **Latency:** Sub-microsecond order book operations, microsecond market data dissemination
-- **Throughput:** Lock-free concurrent processing, zero-allocation critical paths
-- **Scalability:** 195-worker distributed RL training cluster, multi-strategy execution framework
-- **Observability:** 184-dimensional market state representation (23 indicators × 8 timeframes)
+- Latency: Sub-microsecond order book operations, microsecond market data dissemination
+- Throughput: Lock-free concurrent processing, zero-allocation critical paths
+- Scalability: 195-worker distributed reinforcement learning training cluster, multi-strategy execution framework
+- Observability: 184-dimensional market state representation (23 indicators × 8 timeframes)
 
 **System Capabilities:**
-- **Multi-Asset Support:** Cryptocurrencies, FX majors, commodities, indices
-- **Multi-Protocol:** REST, WebSocket, FIX 4.2/4.4, TCP, Multicast UDP
-- **Multi-Language:** Production implementations in C++20, Python, Java, MQL4
-- **Multi-Strategy:** Market making, liquidity taking, systematic alpha, reinforcement learning
+- Multi-asset support: Cryptocurrencies, FX majors, commodities, indices
+- Multi-protocol: REST, WebSocket, FIX 4.2/4.4, TCP, Multicast UDP
+- Multi-language: Research implementations in C++20, Python, Java, MQL4
+- Multi-strategy: Market making, liquidity taking, systematic alpha generation, reinforcement learning
 
 **Infrastructure Components:**
-- Exchange matching engine with price-time priority
+- Exchange matching engine with price-time priority algorithm
 - FIX protocol order routing for institutional connectivity
 - Real-time technical indicator calculation engine
 - Deep reinforcement learning agent training pipeline
@@ -451,79 +466,82 @@ Comprehensive backtesting framework implementing systematic multi-indicator stra
 
 ---
 
-## System Integration Architecture
+## Research Integration Architecture
 
-The technology stack represents a complete end-to-end trading infrastructure:
+The technology stack represents a complete end-to-end trading research infrastructure:
 
-1. **Market Connectivity** → Electronic access to exchanges via REST/WebSocket/FIX
-2. **Data Processing** → Real-time OHLCV data and multi-timeframe technical indicators
-3. **Signal Generation** → 184-dimensional feature engineering for strategy input
-4. **Strategy Execution** → Rule-based algorithms and adaptive RL agents
-5. **Risk Management** → Position limits, drawdown controls, margin monitoring
-6. **Performance Validation** → Statistical backtesting with tick-by-tick precision
+1. **Market Connectivity Layer** - Electronic access to exchanges via REST/WebSocket/FIX protocols
+2. **Data Processing Layer** - Real-time OHLCV data aggregation and multi-timeframe technical indicator calculation
+3. **Signal Generation Layer** - 184-dimensional feature engineering for strategy input
+4. **Strategy Execution Layer** - Rule-based algorithms and adaptive reinforcement learning agents
+5. **Risk Management Layer** - Position limits, drawdown controls, margin monitoring systems
+6. **Performance Validation Layer** - Statistical backtesting with tick-by-tick precision and Monte Carlo validation
 
-Each layer provides abstraction and services to the layers above, enabling modular development of sophisticated trading strategies while maintaining institutional-grade performance and reliability.
+Each layer provides abstraction and services to the layers above, enabling modular development of sophisticated trading research while maintaining institutional-grade performance characteristics and reliability.
 
 ---
 
-## Getting Started - Prerequisites
+## System Prerequisites
 
-Before using any component, ensure you have the following prerequisites:
+### 1. Electronic Market Connectivity
 
-### 1. Crypto Exchange Connectivity
-**Required:** Exchange API credentials (API Key + Secret Key)
-- Create an account on a cryptocurrency exchange (e.g., Binance, GAIA Exchange)
-- Generate API keys from your account dashboard
-- Configure credentials in `Crypto_Exchange/Trading_API/UID*.json`
-- **Language:** Python 3.8+
+**Requirements:** Exchange API credentials (API Key and Secret Key)
+- Supported exchanges: Binance, GAIA Exchange, or compatible REST/WebSocket APIs
+- API key generation through exchange account dashboard
+- Configuration: Credentials stored in `Crypto_Exchange/Trading_API/UID*.json`
+- Software: Python 3.8+
 
-### 2. FIX Protocol Integration
-**Required:** FIX API account with institutional broker
-- Obtain FIX API credentials from your broker/prime broker
-- Configure FIX session settings (Host, Port, SenderCompID, TargetCompID)
-- **Languages:** C++ (QuickFIX), Java (QuickFIX/J), or Python (quickfix)
-- **Note:** This is institutional infrastructure - retail traders typically don't have FIX API access
+### 2. Institutional Execution Protocol Integration
 
-### 3. Low-Latency Exchange Infrastructure
-**Required:** C++20 compiler, CMake, Linux/macOS
-- No external API needed (self-contained matching engine)
-- **Compiler:** GCC 10+ or Clang 12+
-- **Build Tools:** CMake 3.5+, Ninja
-- Runs locally for simulation and testing
+**Requirements:** FIX API account with institutional broker
+- FIX API credentials from broker or prime broker
+- FIX session configuration (Host, Port, SenderCompID, TargetCompID)
+- Software: C++ (QuickFIX), Java (QuickFIX/J), or Python (quickfix library)
+- Note: FIX API access typically restricted to institutional accounts
+
+### 3. Low-Latency Market Microstructure Infrastructure
+
+**Requirements:** C++20 compiler, CMake, Unix-based operating system
+- No external API required (self-contained matching engine implementation)
+- Compiler: GCC 10+ or Clang 12+
+- Build tools: CMake 3.5+, Ninja build system
+- Execution: Runs locally for simulation and research
 
 ### 4. Reinforcement Learning Agent Training
-**Required:** Linux environment with NVIDIA GPU (recommended)
-- **Hardware:** AWS EC2 instance with GPU (e.g., p3.2xlarge, g4dn.xlarge)
-- **Software:** CUDA toolkit, nvidia-smi driver
-- **Python:** 3.8+ with Ray, TensorFlow 2, CUDA support
-- **Note:** CPU-only training is possible but significantly slower
 
-### 5. Trading Signals Dashboard & Backtesting Strategies
-**Required:** MetaTrader 4 terminal
-- Download and install MetaTrader 4 from your broker or MetaQuotes
-- Copy `.mq4` files to MT4's `Experts` folder
-- Compile in MetaEditor (F7)
-- Load Expert Advisor on charts or run in Strategy Tester
-- **Platform:** Windows (or Wine on Linux/macOS)
+**Requirements:** Linux environment with NVIDIA GPU (recommended for training efficiency)
+- Hardware: AWS EC2 GPU instance (e.g., p3.2xlarge, g4dn.xlarge) or equivalent
+- Software: CUDA toolkit, nvidia-smi driver verification
+- Python: 3.8+ with Ray, TensorFlow 2, CUDA support
+- Note: CPU-only training supported but significantly slower (not recommended for production research)
+
+### 5. Trading Signal Generation and Strategy Backtesting
+
+**Requirements:** MetaTrader 4 terminal
+- Platform: MetaTrader 4 from broker or MetaQuotes
+- Installation: Copy `.mq4` files to MT4 `Experts` folder
+- Compilation: Execute in MetaEditor (F7 key)
+- Execution: Load Expert Advisor on charts or execute in Strategy Tester
+- Operating system: Windows (or Wine compatibility layer on Linux/macOS)
 
 ---
 
 ## Build & Deployment
 
-### Low-Latency Exchange Infrastructure (C++)
+### Low-Latency Market Microstructure Infrastructure (C++)
 
-**Prerequisites:** C++20 compiler (GCC 10+, Clang 12+), CMake 3.5+, Ninja
+**Prerequisites:** C++20 compiler (GCC 10+ or Clang 12+), CMake 3.5+, Ninja build system
 
 ```bash
 cd Low_Latency_concept/cpp
-./scripts/build.sh                        # Build in release and debug modes
-./scripts/run_exchange_and_clients.sh     # Start exchange + trading clients
+./scripts/build.sh                        # Build in release and debug configurations
+./scripts/run_exchange_and_clients.sh     # Start exchange infrastructure and trading clients
 ```
 
-**Components Started:**
-- Exchange matching engine (TCP port for orders, multicast for market data)
-- Market maker client (two-sided quoting)
-- Liquidity taker client (aggressive trading)
+**Components Initialized:**
+- Exchange matching engine (TCP port for order entry, multicast UDP for market data)
+- Market maker client (two-sided quoting algorithm)
+- Liquidity taker client (aggressive trading algorithm)
 
 ### Reinforcement Learning Agent Training
 
@@ -535,38 +553,38 @@ cd Reinforcement_Learning/Trading_Agent/Training
 # Install dependencies
 pip install ray[rllib] tensorflow pandas gymnasium ccxt pybit pandas_ta
 
-# Configure training parameters in Ray_Rllib_impala_LSTM.py
-# - Number of workers (default: 195)
+# Configure training parameters in Ray_Rllib_impala_LSTM.py:
+# - Number of rollout workers (default: 195)
 # - LSTM hidden units (default: 512)
-# - Training iterations and checkpointing
+# - Training iterations and checkpoint frequency
 
-# Start distributed training
+# Execute distributed training
 python Ray_Rllib_impala_LSTM.py
 ```
 
 **Training Output:**
-- Checkpoints saved to `~/ray_results/`
-- TensorBoard logs for real-time monitoring
-- Performance metrics: episode reward, Sortino ratio, Sharpe ratio
+- Checkpoint storage: `~/ray_results/` directory
+- TensorBoard logs: Real-time training monitoring
+- Performance metrics: Episode reward, Sortino ratio, Sharpe ratio, maximum drawdown
 
-### Backtesting Agent Performance
+### Agent Performance Validation
 
 ```bash
 cd Reinforcement_Learning/Trading_Agent/Backtest
-python Load_Trained_Agent.py  # Load checkpoint and run on test data
+python Load_Trained_Agent.py  # Load checkpoint and execute on out-of-sample test data
 ```
 
 ### Cryptocurrency Exchange Connectivity
 
-**Prerequisites:** Python 3.8+, GAIA Exchange API credentials
+**Prerequisites:** Python 3.8+, Exchange API credentials
 
 ```bash
 cd Crypto_Exchange/Trading_API
 
-# Configure API keys in JSON file (UID*.json)
+# Configure API keys in JSON configuration file (UID*.json format):
 # {
-#   "GAIAEX_API_KEY": "your_key",
-#   "GAIAEX_SECRET_KEY": "your_secret"
+#   "GAIAEX_API_KEY": "your_api_key",
+#   "GAIAEX_SECRET_KEY": "your_secret_key"
 # }
 
 # Test connectivity
@@ -576,44 +594,44 @@ python 1_connectivity.py
 python Spot_API_testing_development/4d_spot_trading_loop.py
 ```
 
-### MetaTrader 4 Strategies
+### MetaTrader 4 Strategy Execution
 
 **Prerequisites:** MetaTrader 4 terminal
 
 1. Copy `Trading_Strategy/ASB_m15EH1S_v2026.mq4` to MT4 `Experts` folder
 2. Compile in MetaEditor
-3. Run Strategy Tester with tick-by-tick modeling (99.9% quality)
-4. Review backtest reports in `Trading_Strategy/Backtest_ASB_m15EH1S/`
+3. Execute Strategy Tester with tick-by-tick modeling (99.9% quality setting)
+4. Review backtest reports in `Trading_Strategy/Backtest_ASB_m15EH1S/` directory
 
 ---
 
 ## Technical Implementation Details
 
 **Programming Languages:**
-- **C++20:** Low-latency infrastructure, matching engine, concurrent data structures
-- **Python:** RL agent training, exchange connectivity, data processing
-- **Java:** FIX protocol GUI, institutional execution infrastructure
-- **MQL4:** Trading strategies, technical indicators, backtesting
+- C++20: Low-latency infrastructure, matching engine, concurrent data structures research
+- Python: Reinforcement learning agent training, exchange connectivity, data processing
+- Java: FIX protocol GUI implementation, institutional execution infrastructure
+- MQL4: Trading strategies, technical indicators, backtesting research
 
 **Core Technologies:**
-- **Concurrency:** Lock-free queues, atomic operations, memory pools, zero-allocation paths
-- **Networking:** TCP sockets, multicast UDP, WebSocket, FIX session management
-- **Machine Learning:** Ray RLlib, TensorFlow 2, LSTM networks, distributed training
-- **Trading Protocols:** FIX 4.2/4.4, REST APIs, WebSocket streams, HMAC authentication
+- Concurrency: Lock-free queues, atomic operations, memory pools, zero-allocation execution paths
+- Networking: TCP sockets, multicast UDP, WebSocket protocols, FIX session management
+- Machine learning: Ray RLlib distributed framework, TensorFlow 2, LSTM networks, distributed training infrastructure
+- Trading protocols: FIX 4.2/4.4, REST APIs, WebSocket streams, HMAC authentication
 
-**Performance Engineering:**
-- Cache-line aligned data structures
-- Branch prediction optimization
-- SIMD vectorization for indicator calculations
-- GPU-accelerated neural network training
+**Performance Engineering Research:**
+- Cache-line aligned data structures to prevent false sharing
+- Branch prediction optimization for critical paths
+- SIMD vectorization for technical indicator calculations
+- GPU-accelerated neural network training with distributed experience replay
 
 ---
 
 ## Disclaimer
 
-**Risk Warning:** Trading financial instruments involves substantial risk of loss. This software is provided for educational and research purposes only. Past performance does not guarantee future results. Always conduct thorough testing on simulated accounts before considering live deployment. No warranty or guarantee of profitability is provided.
+**Risk Warning:** Trading financial instruments involves substantial risk of loss. This software is provided for educational and research purposes only. Past performance does not guarantee future results. Thorough testing on simulated accounts is required before any consideration of live deployment. No warranty or guarantee of profitability is provided.
 
-**Compliance:** Users are responsible for ensuring compliance with all applicable financial regulations in their jurisdiction. This software does not constitute financial advice.
+**Compliance Notice:** Users are responsible for ensuring compliance with all applicable financial regulations in their jurisdiction. This software does not constitute financial advice or investment recommendations.
 
 ---
 
@@ -623,17 +641,19 @@ MIT License - See individual project directories for specific licensing details.
 
 ---
 
-## Documentation
+## Technical Documentation
 
-Each subsystem contains comprehensive technical documentation:
+Each research component contains comprehensive technical documentation:
 
-- **[Crypto Exchange](Crypto_Exchange/README.md)** - API integration, order execution, WebSocket implementation
-- **[FIX Protocol](FIX_protocol_quickfix/README.md)** - QuickFIX implementation, message flow, session management
-- **[Low-Latency Infrastructure](Low_Latency_concept/cpp/README.md)** - Architecture, performance optimization, benchmarks
-- **[Signal Generation](Trading_Signals_Dashboard/README.md)** - Technical indicators, multi-timeframe analysis
-- **[Reinforcement Learning](Reinforcement_Learning/README.md)** - Agent architecture, training pipeline, reward engineering
-- **[Strategy Backtesting](Trading_Strategy/README.md)** - Backtest results, statistical validation, performance metrics
+- [Cryptocurrency Exchange Connectivity](Crypto_Exchange/README.md) - API integration, order execution, WebSocket implementation
+- [FIX Protocol Implementation](FIX_protocol_quickfix/README.md) - QuickFIX implementation, message flow, session management
+- [Low-Latency Market Microstructure](Low_Latency_concept/cpp/README.md) - Architecture, performance optimization, benchmark results
+- [Signal Generation Research](Trading_Signals_Dashboard/README.md) - Technical indicators, multi-timeframe analysis framework
+- [Reinforcement Learning Systems](Reinforcement_Learning/README.md) - Agent architecture, training pipeline, reward engineering
+- [Strategy Validation](Trading_Strategy/README.md) - Backtest results, statistical validation, performance attribution
 
 ---
 
-`#AlgorithmicTrading` `#HighFrequencyTrading` `#LowLatencyC++` `#ReinforcementLearning` `#FIXProtocol` `#QuantitativeTrading` `#MarketMaking` `#TradingInfrastructure` `#MachineLearning` `#SystemsEngineering`
+## Keywords
+
+Algorithmic Trading, High-Frequency Trading, Low-Latency Systems, C++20, Reinforcement Learning, Deep Learning, FIX Protocol, Quantitative Research, Market Making, Trading Infrastructure, Machine Learning, Market Microstructure, Systems Engineering, Quantitative Finance, Electronic Trading
