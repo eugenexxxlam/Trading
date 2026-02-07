@@ -1,15 +1,19 @@
 # Crypto Exchange Trading System
 
-Python-based cryptocurrency trading automation system for GAIA Exchange with REST API and WebSocket support for spot and futures trading.
+Python-based cryptocurrency trading system for exchange connectivity, order execution, and account management with REST API and WebSocket support for spot and futures trading.
 
 ## Overview
 
-This system provides comprehensive trading tools for cryptocurrency exchanges, featuring real-time market data monitoring, automated trading strategies, position management, and portfolio liquidation capabilities.
+This system provides comprehensive tools for crypto exchange connectivity, including:
+- Sending and executing orders (market and limit orders)
+- Updating and fetching account information
+- Real-time market data monitoring via WebSocket
+- Automated trading strategies and position management
+- Portfolio liquidation capabilities
 
-## Exchange Details
+## API Details
 
-**Platform:** GAIA Exchange (gaiaex.com)  
-**API Documentation:** [Official GAIA Exchange API Docs](https://gaia-4.gitbook.io/gaiaex_api/)  
+**API Documentation:** [Exchange API Docs](https://gaia-4.gitbook.io/gaiaex_api/)  
 **Authentication:** HMAC SHA256 signature-based authentication  
 **Supported Markets:** Spot Trading, Futures Trading
 
@@ -17,6 +21,11 @@ This system provides comprehensive trading tools for cryptocurrency exchanges, f
 
 ```
 Crypto_Exchange/
+├── Orderbook/                       # Multi-exchange orderbook aggregation
+│   ├── 0-13_orderbook_*.py          # Individual exchange connectors (14 files)
+│   ├── 14_CLOB.py                   # Basic CLOB aggregator
+│   ├── 15_CLOB_MM.py                # Market making CLOB with spread controls
+│   └── README.md                    # Orderbook documentation
 ├── Trading_API/                     # REST API trading scripts
 │   ├── 1_connectivity.py            # Test API connectivity
 │   ├── 2_timestamp.py               # Check server time
@@ -39,6 +48,16 @@ Crypto_Exchange/
 ```
 
 ## Features
+
+### 0. Multi-Exchange Orderbook Aggregation (NEW)
+
+**Python Prototype for AI Trading Agents**
+- `Orderbook/` - Multi-exchange CLOB aggregator (see [Orderbook/README.md](Orderbook/README.md))
+- Aggregates real-time orderbook data from 12 exchanges (Binance, OKX, Bybit, Gate, KuCoin, Bitget, BingX, Bitfinex, HTX, Hyperliquid, dYdX, Coinbase, Kraken, Crypto.com)
+- **14_CLOB.py**: Basic aggregation with weighted volumes
+- **15_CLOB_MM.py**: Market making mode with spread controls
+- Provides unified market observation for AI trading agents
+- Python prototype to be reimplemented in C++ for production
 
 ### 1. Basic API Operations
 
@@ -136,14 +155,14 @@ All scripts require a JSON configuration file containing API credentials:
 **Format (e.g., `UID32937591.json`):**
 ```json
 {
-  "GAIAEX_API_KEY": "your_api_key_here",
-  "GAIAEX_SECRET_KEY": "your_secret_key_here"
+  "API_KEY": "your_api_key_here",
+  "SECRET_KEY": "your_secret_key_here"
 }
 ```
 
 ### Authentication
 
-HMAC SHA256 signature generation:
+HMAC SHA256 signature generation for exchange API:
 ```python
 signature_payload = f"{timestamp}POST{request_path}{body}"
 signature = hmac.new(secret_key.encode(), signature_payload.encode('utf-8'), hashlib.sha256).hexdigest()
@@ -177,6 +196,18 @@ pip install requests websocket-client prettytable pandas
 ```
 
 ## Usage Examples
+
+### 0. Orderbook Aggregation (NEW)
+```bash
+# Test single exchange orderbook
+python Orderbook/0_orderbook_binance.py
+
+# Run basic CLOB aggregator (passive mode)
+python Orderbook/14_CLOB.py
+
+# Run market making CLOB (with spread controls)
+python Orderbook/15_CLOB_MM.py
+```
 
 ### 1. Test Connectivity
 ```bash
@@ -218,20 +249,20 @@ python Trading_API/Spot_API_testing_development/7_bulk_buy.py
 ### Common Configuration Constants
 
 **Spot Trading:**
-- `BASE_URL`: 'https://openapi.gaiaex.com'
+- `BASE_URL`: Exchange API base URL for spot trading
 - `ORDER_TYPE`: 'MARKET' or 'LIMIT'
 - `SIDE`: 'BUY' or 'SELL'
 - `VOLUME`: Order size
 - `THRESHOLD`: Minimum balance for operations (default: 1 USDT)
 
 **Futures Trading:**
-- `BASE_URL`: 'https://futuresopenapi.gaiaex.com'
+- `BASE_URL`: Exchange API base URL for futures trading
 - `CONTRACT_NAME`: e.g., 'USDT-TON-USDT'
 - `OPEN_POSITION`: 'OPEN' or 'CLOSE'
 - `POSITION_TYPE`: 1 (Cross) or 2 (Isolated)
 
 **WebSocket:**
-- `WS_URL`: 'wss://ws.gaiaex.com/kline-api/ws'
+- `WS_URL`: Exchange WebSocket URL
 - Compression: Gzip
 
 ## API Endpoints
@@ -377,14 +408,8 @@ symbol_name_mapping = {
 
 ## Resources
 
-**Official Documentation:**
-- [GAIA Exchange API Documentation](https://gaia-4.gitbook.io/gaiaex_api/) - Complete API reference with endpoints, authentication, and examples
-- [GAIA Exchange Website](https://www.gaiaex.com) - Trading platform
-
-**API Endpoints:**
-- Base URL (Spot): `https://openapi.gaiaex.com`
-- Base URL (Futures): `https://futuresopenapi.gaiaex.com`
-- WebSocket: `wss://ws.gaiaex.com/kline-api/ws`
+**API Documentation:**
+- [Exchange API Documentation](https://gaia-4.gitbook.io/gaiaex_api/) - Complete API reference with endpoints, authentication, and examples
 
 **Key Documentation Sections:**
 - [OpenAPI Basic Information](https://gaia-4.gitbook.io/gaiaex_api/) - Authentication and request signing
