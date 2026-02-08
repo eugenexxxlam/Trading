@@ -12,11 +12,11 @@ from importlib import import_module
 
 # Exchange configuration
 EXCHANGES = {
-    'binance': {'module': '0_orderbook_binance', 'class': 'BinanceOrderBook', 'weight': 1.0},
-    'okx': {'module': '1_orderbook_okx', 'class': 'OKXOrderBook', 'weight': 0.9},
-    'bybit': {'module': '2_orderbook_bybit', 'class': 'BybitOrderBook', 'weight': 0.85},
-    'gate': {'module': '3_orderbook_gate', 'class': 'GateOrderBook', 'weight': 0.75},
-    'kucoin': {'module': '4_orderbook_kucoin', 'class': 'KucoinOrderBook', 'weight': 0.7},
+    'binance': {'module': '1_orderbook_binance', 'class': 'BinanceOrderBook', 'weight': 1.0},
+    'okx': {'module': '2_orderbook_okx', 'class': 'OKXOrderBook', 'weight': 0.9},
+    'bybit': {'module': '3_orderbook_bybit', 'class': 'BybitOrderBook', 'weight': 0.85},
+    'gate': {'module': '4_orderbook_gate', 'class': 'GateOrderBook', 'weight': 0.75},
+    'kucoin': {'module': '14_orderbook_kucoin', 'class': 'KucoinOrderBook', 'weight': 0.7},
     'bitget': {'module': '5_orderbook_bitget', 'class': 'BitgetOrderBook', 'weight': 0.65},
     'bingx': {'module': '6_orderbook_bingx', 'class': 'BingxOrderBook', 'weight': 0.6},
     'htx': {'module': '8_orderbook_HTX', 'class': 'HTXOrderBook', 'weight': 0.5},

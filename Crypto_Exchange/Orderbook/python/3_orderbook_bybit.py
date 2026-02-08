@@ -44,6 +44,12 @@ class BybitOrderBook:
                 while self.running:
                     data = json.loads(ws.recv())
                     
+                    # NOTE: Bybit sends two message types:
+                    # 1. "snapshot" (type=snapshot) - full orderbook on initial subscription
+                    # 2. "delta" (type=delta) - incremental updates (adds/removes/modifies levels)
+                    # Python version processes both types the same way (replaces entire book)
+                    # For production: should maintain state and apply deltas for efficiency
+                    
                     if "data" not in data:
                         continue
                     
