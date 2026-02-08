@@ -1,88 +1,76 @@
-# CLOB Orderbook Aggregator
+# Multi-Exchange CLOB Aggregator
 
-## Purpose
+Real-time orderbook aggregation from 12 cryptocurrency exchanges (Binance, Coinbase, OKX, Bybit, Gate, KuCoin, Bitget, BingX, Kraken, HTX, Hyperliquid, dYdX). Provides unified market depth view for algorithmic trading systems.
 
-Python prototype for aggregating orderbook data from 12 cryptocurrency exchanges. This serves as the **observation layer** for AI trading agents - providing a unified view of market liquidity before implementing the final version in C++.
+## Architecture
 
-## What It Does
+**Python Implementation** (Production)
+- Modular design with `core/` package (config, aggregator, display)
+- Lock-free queues for multi-exchange feed handling
+- Confidence-weighted aggregation with age-based decay
+- Configurable spread controls and liquidity filtering
 
-Connects to 12 exchanges via WebSocket and combines their orderbooks into one aggregated view. Shows you the best bid/ask prices and liquidity across all exchanges in real-time.
+**C++ Implementation** (High-Performance)
+- Ultra-low latency aggregation engine
+- Lock-free data structures for concurrent updates
+- Optimized for sub-millisecond processing
 
-## Files
+## Observe CLOB
 
-**Exchange Connectors (0-13):**
-- Each file connects to one exchange (Binance, OKX, Bybit, Gate, KuCoin, Bitget, BingX, Bitfinex, HTX, Hyperliquid, dYdX, Coinbase, Kraken, Crypto.com)
-- Gets real-time orderbook data via WebSocket
-- Can run standalone to test individual exchange feeds
-
-**Aggregators:**
-- `14_CLOB.py` - Basic version: aggregates orderbooks with simple weighted averaging
-- `15_CLOB_MM.py` - Market making version: adds spread control and liquidity management
-
-## How to Use
-
+### Python (Live Display)
 ```bash
-# Install dependency
-pip install websocket-client
-
-# Test a single exchange
-python3 0_orderbook_binance.py
-
-# Run basic aggregator
-python3 14_CLOB.py
-
-# Run market making version (with spread controls)
-python3 15_CLOB_MM.py
+python3 python/0_CLOB_MM_display.py
 ```
+Real-time terminal UI showing:
+- Aggregated bids/asks with exchange attribution
+- Per-exchange confidence scores and spread metrics
+- Cumulative liquidity depth and FPS counter
 
-## 14_CLOB.py vs 15_CLOB_MM.py
+### C++ (Production Engine)
+```bash
+cd cpp/build
+./clob_aggregator_12x
+```
+High-performance aggregation with JSON output for integration.
 
-**14_CLOB.py** - Passive mode:
-- Combines all exchange orderbooks using weighted volumes
-- Filters out small orders (< $10K notional)
-- Shows natural market spreads
+## Configuration
 
-**15_CLOB_MM.py** - Market making mode:
-- Same as above, plus:
-- Adjustable bid/ask markup to tighten spreads
-- Per-exchange weight control (boost/reduce specific exchanges)
-- Minimum spread enforcement
-
-Edit the `CONTROLS` dict in 15_CLOB_MM.py to adjust:
+Edit `python/core/config.py`:
 ```python
 CONTROLS = {
-    'bid_markup_bps': 20,      # Push bids up (tighten spread)
-    'ask_markup_bps': -20,     # Push asks down (tighten spread)
-    'min_notional': 10000,     # Filter orders < $10K
-    'weights': {               # Boost/reduce specific exchanges
-        'binance': 1.5,
-        'coinbase': 1.3,
-        # ...
+    'min_notional': 10000,      # Minimum order size (USDT)
+    'depth': 16,                # Price levels per side
+    'bid_markup_bps': 0.8,      # Spread tightening (basis points)
+    'ask_markup_bps': 0.1,
+    'weights': {                # Exchange priority weighting
+        'binance': 1.5,         # Tier 1: Price discovery
+        'coinbase': 1.5,
+        'gate': 1.0,            # Tier 2: Reliable
+        'okx': 0.3,             # Tier 4: Wide spreads
     }
 }
 ```
 
-## Output Format
+## Key Features
 
-Both scripts display:
-- Aggregated bids (buy orders) and asks (sell orders)
-- Price, volume in BTC, notional in USDT
-- Cumulative totals
-- Liquidity provider (which exchange)
+- **Confidence Weighting**: Age-based decay (100% @ 0-3s → 5% @ 15s+)
+- **Spread Management**: Configurable bid/ask markup in basis points
+- **Liquidity Filtering**: Minimum notional threshold per level
+- **Exchange Tiering**: 4-tier weight system based on spread quality
+- **Lock-Free Design**: No thread contention across 12 concurrent feeds
 
-## Next Steps
+## Dependencies
 
-This is a **prototype**. The plan:
-1. Use this to understand market data structure
-2. Reimplement in C++ for production speed
-3. Feed the aggregated orderbook to AI trading agents as the "observation" of market state
+```bash
+pip install websocket-client
+```
 
-## For AI Trading Agents
+## Output
 
-The aggregated orderbook provides:
-- Current best bid/ask across all venues
-- Available liquidity at each price level
-- Market depth for impact estimation
-- Real-time spread and mid-price
+Aggregated orderbook provides:
+- Best bid/ask across all venues
+- Price, volume (BTC), notional (USDT)
+- Cumulative depth and liquidity provider attribution
+- Real-time spread, mid-price, and market quality metrics
 
-This is what the agent "sees" before deciding to buy/sell.
+Built for AI trading agents requiring unified market observation.
