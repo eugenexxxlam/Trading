@@ -1,0 +1,11 @@
+/home/ubuntu/2026_cpp/2026_temp/Trading/Crypto_Exchange/Orderbook/rust/orderbook/target/release/deps/ctrlc-27f1e8ea08b64a6a.d: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/error.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/unix/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/signal.rs
+
+/home/ubuntu/2026_cpp/2026_temp/Trading/Crypto_Exchange/Orderbook/rust/orderbook/target/release/deps/libctrlc-27f1e8ea08b64a6a.rlib: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/error.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/unix/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/signal.rs
+
+/home/ubuntu/2026_cpp/2026_temp/Trading/Crypto_Exchange/Orderbook/rust/orderbook/target/release/deps/libctrlc-27f1e8ea08b64a6a.rmeta: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/error.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/unix/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/signal.rs
+
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/lib.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/error.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/mod.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/platform/unix/mod.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctrlc-3.5.1/src/signal.rs:
