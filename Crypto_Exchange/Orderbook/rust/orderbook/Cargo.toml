@@ -8,6 +8,58 @@ description = "Binance Orderbook Feed in Rust"
 name = "orderbook_binance"
 path = "src/bin/orderbook_binance.rs"
 
+[[bin]]
+name = "orderbook_bybit"
+path = "src/bin/orderbook_bybit.rs"
+
+[[bin]]
+name = "orderbook_gate"
+path = "src/bin/orderbook_gate.rs"
+
+[[bin]]
+name = "orderbook_okx"
+path = "src/bin/orderbook_okx.rs"
+
+[[bin]]
+name = "orderbook_bitget"
+path = "src/bin/orderbook_bitget.rs"
+
+[[bin]]
+name = "orderbook_bingx"
+path = "src/bin/orderbook_bingx.rs"
+
+[[bin]]
+name = "orderbook_bitfinex"
+path = "src/bin/orderbook_bitfinex.rs"
+
+[[bin]]
+name = "orderbook_HTX"
+path = "src/bin/orderbook_HTX.rs"
+
+[[bin]]
+name = "orderbook_hyperliquid"
+path = "src/bin/orderbook_hyperliquid.rs"
+
+[[bin]]
+name = "orderbook_dydx"
+path = "src/bin/orderbook_dydx.rs"
+
+[[bin]]
+name = "orderbook_coinbase"
+path = "src/bin/orderbook_coinbase.rs"
+
+[[bin]]
+name = "orderbook_kraken"
+path = "src/bin/orderbook_kraken.rs"
+
+[[bin]]
+name = "orderbook_cryptocom"
+path = "src/bin/orderbook_cryptocom.rs"
+
+[[bin]]
+name = "orderbook_kucoin"
+path = "src/bin/orderbook_kucoin.rs"
+
 [dependencies]
 # WebSocket with TLS support (using rustls for pure-Rust TLS)
 tungstenite = { version = "0.24", features = ["rustls-tls-native-roots"] }
@@ -22,3 +74,9 @@ chrono = "0.4"
 
 # Ctrl+C handling
 ctrlc = "3.4"
+
+# Gzip decompression (for Bitget)
+flate2 = "1.0"
+
+# HTTP client for REST API calls (for KuCoin)
+ureq = { version = "2.9", features = ["json"] }

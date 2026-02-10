@@ -233,43 +233,51 @@ target_compile_options(orderbook_lib PRIVATE
 target_compile_definitions(orderbook_lib PRIVATE NO_MAIN)
 
 # Benchmark executable (shares implementation with main)
-add_executable(benchmark_latency benchmark_latency.cpp)
-target_link_libraries(benchmark_latency PRIVATE 
-    orderbook_lib
-    Boost::system
-    OpenSSL::SSL
-    OpenSSL::Crypto
-    simdjson::simdjson
-    Threads::Threads
-)
-target_compile_options(benchmark_latency PRIVATE
-    $<$<CONFIG:Release>:-ffast-math>
-    $<$<CONFIG:Release>:-funroll-loops>
-)
-set_property(TARGET benchmark_latency PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/benchmark_latency.cpp")
+    add_executable(benchmark_latency benchmark_latency.cpp)
+    target_link_libraries(benchmark_latency PRIVATE 
+        orderbook_lib
+        Boost::system
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        simdjson::simdjson
+        Threads::Threads
+    )
+    target_compile_options(benchmark_latency PRIVATE
+        $<$<CONFIG:Release>:-ffast-math>
+        $<$<CONFIG:Release>:-funroll-loops>
+    )
+    set_property(TARGET benchmark_latency PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+    message(STATUS "Skipping benchmark_latency: benchmark_latency.cpp not found")
+endif()
 
 # CLOB Aggregator - 3 Exchanges (Binance, Coinbase, OKX)
 # Define NO_MAIN to exclude standalone main() from exchange implementations
-add_executable(clob_aggregator
-    clob_aggregator_main.cpp
-    0_CLOB_MM.cpp
-    1_orderbook_binance.cpp
-    2_orderbook_okx.cpp
-    11_orderbook_coinbase.cpp
-)
-target_compile_definitions(clob_aggregator PRIVATE NO_MAIN)
-target_link_libraries(clob_aggregator PRIVATE
-    Boost::system
-    OpenSSL::SSL
-    OpenSSL::Crypto
-    simdjson::simdjson
-    Threads::Threads
-)
-target_compile_options(clob_aggregator PRIVATE
-    $<$<CONFIG:Release>:-ffast-math>
-    $<$<CONFIG:Release>:-funroll-loops>
-)
-set_property(TARGET clob_aggregator PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/clob_aggregator_main.cpp")
+    add_executable(clob_aggregator
+        clob_aggregator_main.cpp
+        0_CLOB_MM.cpp
+        1_orderbook_binance.cpp
+        2_orderbook_okx.cpp
+        11_orderbook_coinbase.cpp
+    )
+    target_compile_definitions(clob_aggregator PRIVATE NO_MAIN)
+    target_link_libraries(clob_aggregator PRIVATE
+        Boost::system
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        simdjson::simdjson
+        Threads::Threads
+    )
+    target_compile_options(clob_aggregator PRIVATE
+        $<$<CONFIG:Release>:-ffast-math>
+        $<$<CONFIG:Release>:-funroll-loops>
+    )
+    set_property(TARGET clob_aggregator PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+    message(STATUS "Skipping clob_aggregator: clob_aggregator_main.cpp not found")
+endif()
 
 # CLOB Aggregator - 12 Exchanges (Production version matching Python)
 add_executable(clob_aggregator_12x
@@ -307,56 +315,64 @@ target_compile_options(clob_aggregator_12x PRIVATE
 set_property(TARGET clob_aggregator_12x PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
 
 # Lock-Free CLOB Aggregator (Short version)
-add_executable(lfq_clob
-    LFQ_CLOB_short.cpp
-    0_CLOB_MM.cpp
-    1_orderbook_binance.cpp
-    2_orderbook_okx.cpp
-    3_orderbook_bybit.cpp
-    4_orderbook_gate.cpp
-    5_orderbook_bitget.cpp
-    6_orderbook_bingx.cpp
-    7_orderbook_bitfinex.cpp
-    8_orderbook_HTX.cpp
-    9_orderbook_hyperliquid.cpp
-    10_orderbook_dydx.cpp
-    11_orderbook_coinbase.cpp
-    12_orderbook_kraken.cpp
-    13_orderbook_cryptocom.cpp
-    14_orderbook_kucoin.cpp
-)
-target_compile_definitions(lfq_clob PRIVATE NO_MAIN)
-target_link_libraries(lfq_clob PRIVATE
-    Boost::system
-    Boost::iostreams
-    OpenSSL::SSL
-    OpenSSL::Crypto
-    simdjson::simdjson
-    Threads::Threads
-    ZLIB::ZLIB
-)
-target_compile_options(lfq_clob PRIVATE
-    $<$<CONFIG:Release>:-ffast-math>
-    $<$<CONFIG:Release>:-funroll-loops>
-)
-set_property(TARGET lfq_clob PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/LFQ_CLOB_short.cpp")
+    add_executable(lfq_clob
+        LFQ_CLOB_short.cpp
+        0_CLOB_MM.cpp
+        1_orderbook_binance.cpp
+        2_orderbook_okx.cpp
+        3_orderbook_bybit.cpp
+        4_orderbook_gate.cpp
+        5_orderbook_bitget.cpp
+        6_orderbook_bingx.cpp
+        7_orderbook_bitfinex.cpp
+        8_orderbook_HTX.cpp
+        9_orderbook_hyperliquid.cpp
+        10_orderbook_dydx.cpp
+        11_orderbook_coinbase.cpp
+        12_orderbook_kraken.cpp
+        13_orderbook_cryptocom.cpp
+        14_orderbook_kucoin.cpp
+    )
+    target_compile_definitions(lfq_clob PRIVATE NO_MAIN)
+    target_link_libraries(lfq_clob PRIVATE
+        Boost::system
+        Boost::iostreams
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        simdjson::simdjson
+        Threads::Threads
+        ZLIB::ZLIB
+    )
+    target_compile_options(lfq_clob PRIVATE
+        $<$<CONFIG:Release>:-ffast-math>
+        $<$<CONFIG:Release>:-funroll-loops>
+    )
+    set_property(TARGET lfq_clob PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+    message(STATUS "Skipping lfq_clob: LFQ_CLOB_short.cpp not found")
+endif()
 
 # CLOB Aggregator Test (Mock data - for testing aggregation logic only)
-add_executable(test_clob_aggregator 
-    test_clob_aggregator.cpp
-    0_CLOB_MM.cpp
-)
-target_link_libraries(test_clob_aggregator PRIVATE
-    Boost::system
-    OpenSSL::SSL
-    OpenSSL::Crypto
-    simdjson::simdjson
-    Threads::Threads
-)
-target_compile_options(test_clob_aggregator PRIVATE
-    $<$<CONFIG:Release>:-ffast-math>
-    $<$<CONFIG:Release>:-funroll-loops>
-)
-set_property(TARGET test_clob_aggregator PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test_clob_aggregator.cpp")
+    add_executable(test_clob_aggregator 
+        test_clob_aggregator.cpp
+        0_CLOB_MM.cpp
+    )
+    target_link_libraries(test_clob_aggregator PRIVATE
+        Boost::system
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        simdjson::simdjson
+        Threads::Threads
+    )
+    target_compile_options(test_clob_aggregator PRIVATE
+        $<$<CONFIG:Release>:-ffast-math>
+        $<$<CONFIG:Release>:-funroll-loops>
+    )
+    set_property(TARGET test_clob_aggregator PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+    message(STATUS "Skipping test_clob_aggregator: test_clob_aggregator.cpp not found")
+endif()
 
 install(TARGETS binance_orderbook DESTINATION bin)

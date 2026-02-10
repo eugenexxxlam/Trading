@@ -73,6 +73,11 @@ fn render_orderbook(bids: &[(f64, f64)], asks: &[(f64, f64)], ups: f64, total: u
         format!("\x1b[{c}m{:>11}\x1b[0m  {:>10.7}  {:>9}  {:>10.4}  {:>9}\n",
             format_price(p), q, format_commas(n as i64), cb, format_commas(cu as i64));
     
+    let padding_row = |cb: f64, cu: f64| 
+        format!("{:>11}  {:>10}  {:>9}  {:>10.4}  {:>9}\n",
+            "---", "---", "---", cb, format_commas(cu as i64));
+    
+    // ASKS section - always 16 levels
     out.push_str(&header("ASKS (Sell Orders)"));
     let mut cum = (0.0, 0.0);
     let ask_rows: Vec<_> = asks.iter().take(16).map(|&(p, q)| {
@@ -80,15 +85,27 @@ fn render_orderbook(bids: &[(f64, f64)], asks: &[(f64, f64)], ups: f64, total: u
         (p, q, p * q, cum.0, cum.1)
     }).collect();
     
-    for &(p, q, n, cb, cu) in ask_rows.iter().rev() {
-        out.push_str(&row(RED, p, q, n, cb, cu));
+    // Display asks in reverse (highest first)
+    for i in (0..16).rev() {
+        if i < ask_rows.len() {
+            let (p, q, n, cb, cu) = ask_rows[i];
+            out.push_str(&row(RED, p, q, n, cb, cu));
+        } else {
+            out.push_str(&padding_row(cum.0, cum.1));
+        }
     }
     
+    // BIDS section - always 16 levels
     out.push_str(&format!("\n{}", header("BIDS (Buy Orders)")));
     cum = (0.0, 0.0);
-    for &(p, q) in bids.iter().take(16) {
-        cum = (cum.0 + q, cum.1 + p * q);
-        out.push_str(&row(GREEN, p, q, p * q, cum.0, cum.1));
+    for i in 0..16 {
+        if i < bids.len() {
+            let (p, q) = bids[i];
+            cum = (cum.0 + q, cum.1 + p * q);
+            out.push_str(&row(GREEN, p, q, p * q, cum.0, cum.1));
+        } else {
+            out.push_str(&padding_row(cum.0, cum.1));
+        }
     }
     
     out.push_str(&format!("{sep}\n"));
